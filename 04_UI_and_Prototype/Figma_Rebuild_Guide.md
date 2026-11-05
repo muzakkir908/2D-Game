@@ -1,15 +1,15 @@
 # Figma Rebuild Guide
 
-The Figma file still shows the old game. There are two ways to fix it.
+The old Figma file I made is in a different Figma account, and it shows the old game. **Do not use it.** Make a new, empty Design file in your own Figma account and use the plugin below. (If you prefer to do it by hand, the manual way is further down.)
 
 ## ⭐ Quick way: run the WICKLIGHT plugin (about 3 minutes)
 
-The folder `04_UI_and_Prototype/figma_plugin/` has a small Figma plugin. It builds everything for you: the 4 frames with the screen PNGs, all the buttons, the click areas, the 11 links and the starting screen. It does **not** delete your old design. It renames the old pages to "OLD VERSION" so you keep a backup.
+The folder `04_UI_and_Prototype/figma_plugin/` has a small Figma plugin. It builds everything for you: the 4 frames with the screen PNGs, all the buttons, the click areas, the 11 links and the starting screen. It does **not** delete anything by itself. It renames the old pages to "OLD VERSION" so you keep a backup.
 
 You need the **Figma desktop app**, because Figma only allows your own plugins in the desktop app. Download it from figma.com/downloads.
 
 1. Download the project from GitHub (green **Code** button → **Download ZIP**) and unzip it.
-2. Open the Figma desktop app and open your WICKLIGHT file.
+2. Open the Figma desktop app. On the home screen, click **Design** (top right) to make a new empty Design file. Click the file name at the top and rename it **WICKLIGHT - The Little Candle**.
 3. In the top menu, choose **Plugins → Development → Import plugin from manifest…**
 4. Choose the file `04_UI_and_Prototype/figma_plugin/manifest.json`.
 5. Choose **Plugins → Development → WICKLIGHT Prototype Builder → Build WICKLIGHT prototype**.
@@ -23,8 +23,6 @@ If the plugin shows an error, use the manual way below.
 ---
 
 ## Manual way (about 15–20 minutes)
-
-**Figma file:** https://www.figma.com/design/E1gSy4J9rj3xGSCBafzJrX
 
 **You need these 4 files** (from `04_UI_and_Prototype/screens/`):
 

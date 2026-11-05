@@ -69,8 +69,6 @@ Open `prototype/index.html` in a web browser by double-clicking it.
 
 ## Figma prototype
 
-**Figma file:** https://www.figma.com/design/E1gSy4J9rj3xGSCBafzJrX
+**Figma link:** make your own new Figma file and put its share link in `05_Documentation/Submission_Document.md`. (An older Figma file from an earlier version of this project exists in a different Figma account. It shows the old game, so do not use it.)
 
-> ⚠️ **This Figma file still shows the OLD, complicated version of the game.** I could not update it, because the Figma editing tool has reached the Starter plan's monthly limit. You need to rebuild it with the 4 new screens before you submit.
-
-The quick fix: run the small Figma plugin in `figma_plugin/`. It builds the 4 screens, the buttons, all 11 links and the starting screen in about 3 minutes. Steps: **[`Figma_Rebuild_Guide.md`](Figma_Rebuild_Guide.md)** (the guide also has a manual way).
+How to build it: run the small Figma plugin in `figma_plugin/`. It builds the 4 screens, the buttons, all 11 links and the starting screen in about 3 minutes. Steps: **[`Figma_Rebuild_Guide.md`](Figma_Rebuild_Guide.md)** (the guide also has a manual way).
