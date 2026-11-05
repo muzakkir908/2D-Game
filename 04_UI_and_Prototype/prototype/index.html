@@ -119,7 +119,7 @@
 <div class="wrap">
   <header>
     <h1>WICKLIGHT <small>THE DROWNED BELFRY</small></h1>
-    <span class="meta">CLICK-THROUGH UI PROTOTYPE · 384×216 NATIVE · 16PX GRID</span>
+    <span class="meta">CLICKABLE UI PROTOTYPE · 384×216 SCREENS · 16PX TILES</span>
   </header>
 
   <div class="cabinet">
@@ -142,32 +142,32 @@
 
   <section class="hint" aria-live="polite">
     <span class="k">ON THIS SCREEN</span><p id="hintText"></p>
-    <span class="k">KEYS</span><p><kbd>ENTER</kbd> main action &nbsp; <kbd>ESC</kbd> back to menu &nbsp; on Gameplay: <kbd>W</kbd> win, <kbd>L</kbd> lose</p>
+    <span class="k">KEYS</span><p><kbd>ENTER</kbd> main button &nbsp; <kbd>ESC</kbd> back to menu &nbsp; on Gameplay: <kbd>W</kbd> win, <kbd>L</kbd> lose</p>
   </section>
 
-  <p class="foot"><strong>How to read this prototype:</strong> each screen is the real 384×216 game frame,
-    scaled up without smoothing, so every pixel matches the shipped assets. Buttons light up on hover with their in-game
-    hover state. Clicking empty space flashes the clickable areas, the same way Figma's prototype mode does.</p>
+  <p class="foot"><strong>How to use this prototype:</strong> each screen is the real 384×216 game screen, made bigger
+    without blurring. Click the buttons to move between screens. Buttons light up when your mouse is over them.
+    If you click an empty area, the clickable areas flash for a moment.</p>
 </div>
 
 <script>
 (function () {
   var W = 384, H = 216;
   var SCREENS = {
-    menu: { img: "01_main_menu", hint: "Click PLAY to start the level, SETTINGS to open options, or EXIT.", hots: [
+    menu: { img: "01_main_menu", hint: "Click PLAY to start, SETTINGS to see the options, or EXIT.", hots: [
       { r: [140, 84, 104, 17], btn: "play", go: "game", primary: true, label: "Play" },
       { r: [140, 108, 104, 17], btn: "settings", go: "settings", label: "Settings" },
       { r: [140, 132, 104, 17], btn: "exit", action: "exit", label: "Exit" } ] },
-    settings: { img: "05_settings_bonus", hint: "Settings (bonus screen). Click BACK to return to the main menu.", hots: [
+    settings: { img: "05_settings_bonus", hint: "Settings (extra screen). Click BACK to go back to the main menu.", hots: [
       { r: [152, 168, 80, 17], btn: "back", go: "menu", primary: true, label: "Back" } ] },
-    game: { img: "02_gameplay", hint: "Pip is on the high road at Glow x3, and the frost moth has spotted the light. Click the MOTH or the SPIKES to lose your last life (Game Over). Click the BELL SHARD route on the right to carry on to the Great Bell (Victory).", hots: [
+    game: { img: "02_gameplay", hint: "Pip is on the high path with a glow of x3, and the frost moth has seen the light. Click the MOTH or the SPIKES to lose your last life (Game Over). Click the BELL SHARD path on the right to go on to the Great Bell (Victory).", hots: [
       { r: [204, 36, 40, 30], go: "lose", label: "Touch the frost moth" },
       { r: [158, 148, 52, 16], go: "lose", label: "Fall onto the spikes" },
       { r: [300, 44, 84, 52], go: "win", primary: true, label: "Continue to the Great Bell" } ] },
-    win: { img: "03_victory", hint: "Level complete. REPLAY restarts the level and MAIN MENU returns to the title.", hots: [
+    win: { img: "03_victory", hint: "Level complete. REPLAY starts the level again. MAIN MENU goes back to the title screen.", hots: [
       { r: [86, 170, 100, 17], btn: "replay", go: "game", primary: true, label: "Replay" },
       { r: [198, 170, 100, 17], btn: "main_menu", go: "menu", label: "Main menu" } ] },
-    lose: { img: "04_game_over", hint: "Out of lives. RETRY restarts from the last lit sconce and MAIN MENU returns to the title.", hots: [
+    lose: { img: "04_game_over", hint: "No lives left. RETRY starts the level again. MAIN MENU goes back to the title screen.", hots: [
       { r: [86, 172, 100, 17], btn: "retry", go: "game", primary: true, label: "Retry" },
       { r: [198, 172, 100, 17], btn: "main_menu", go: "menu", label: "Main menu" } ] }
   };
@@ -213,7 +213,7 @@
   }
 
   function act(h) {
-    if (h.action === "exit") { showToast("THANKS FOR PLAYING", "On desktop this closes the game. In the prototype it stays on the title."); return; }
+    if (h.action === "exit") { showToast("THANKS FOR PLAYING", "In the real game this closes the game. In the prototype you stay on the title screen."); return; }
     go(h.go);
   }
 

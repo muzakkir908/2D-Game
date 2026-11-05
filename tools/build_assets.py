@@ -1,4 +1,4 @@
-"""Exports the WICKLIGHT pixel-art asset pack into 02_Pixel_Art_Assets/."""
+"""Saves all the pixel art (sprites, sprite sheets, tileset, palette, UI) into 02_Pixel_Art_Assets/."""
 import json
 import os
 from PIL import Image, ImageDraw
@@ -132,7 +132,7 @@ def export_ui():
 
 
 def overview():
-    """Labelled presentation sheet of every asset (x4)."""
+    """One big sheet that shows every asset with its name (4x size)."""
     groups = sprite_groups()
     W = 400
     im = Image.new("RGBA", (W, 330), wl.rgba('N'))
@@ -171,7 +171,7 @@ def overview():
 
 
 def character_sheet():
-    """Pip presentation sheet: every frame at x8 with pixel grid + size callouts."""
+    """Pip character sheet: every frame at 8x size with a pixel grid and the hitbox."""
     S = 8
     anims = list(wl.PIP_ANIMS)
     frames = [(n + ' ' + str(j), f) for n in anims for j, f in enumerate(wl.pip_anim(n))]
@@ -223,7 +223,6 @@ def main():
             sheet.alpha_composite(f, (i * 16, r * 16))
         atlas[name] = {"row": r, "frames": len(frames), "y": r * 16}
     sheet.save(p("spritesheets", "wicklight_master_spritesheet.png"))
-    wl.scale(sheet, 4).save(p("spritesheets", "wicklight_master_spritesheet_x4_preview.png"))
     meta["master_sheet"] = {"file": "wicklight_master_spritesheet.png", "cell": 16, "rows": atlas}
     with open(p("spritesheets", "spritesheets.json"), "w") as f:
         json.dump(meta, f, indent=2)

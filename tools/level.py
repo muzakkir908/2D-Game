@@ -1,4 +1,4 @@
-"""Level 1 - "The Drowned Belfry": data + rendering helpers.
+"""Level 1, "The Drowned Belfry": the level layout and the code that draws it.
 
 Legend
   #  stone (auto top/fill)     =  wooden plank (one-way)   %  crumbling stone
@@ -81,7 +81,7 @@ SECTIONS = [
     ("THE WICK-ROOM", "TEACH", S1_WICK_ROOM),
     ("MOTH GALLERY", "CHOOSE", S2_MOTH_GALLERY),
     ("FLOODED NAVE", "PRESSURE", S3_FLOODED_NAVE),
-    ("BELL CLIMB", "EXAM", S4_BELL_CLIMB),
+    ("BELL CLIMB", "FINAL TEST", S4_BELL_CLIMB),
 ]
 for _, _, sec in SECTIONS:
     assert len(sec) == 14 and all(len(r) == 24 for r in sec), [len(r) for r in sec]
@@ -134,7 +134,7 @@ def count(ch):
 
 def render(x0=0, x1=W, frame=0, lit_sconces=(), player=None, show_start=True,
            moth_offsets=None, bg_shade=True):
-    """Render columns [x0,x1) of the level at 1x. Returns RGBA image."""
+    """Draw the level from column x0 up to (not including) column x1, at 1x size."""
     tiles = {n: t for n, t, _ in __import__('build_assets').TILESET}
     tiles['water_surface_0'] = wl.tile_water(frame % 2)
     im = Image.new("RGBA", ((x1 - x0) * 16, H * 16), wl.rgba('N'))

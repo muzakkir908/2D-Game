@@ -1,80 +1,88 @@
 # WICKLIGHT: The Drowned Belfry
-### Game Design Document (pre-production) · v0.1
+### Game Design Document
 
 ![Main menu](../04_UI_and_Prototype/screens/01_main_menu_1920x1080.png)
 
 | | |
 |---|---|
-| **Assignment theme** | **3. No Risk? No Reward!** |
-| **Genre** | 2D pixel-art precision platformer with a push-your-luck scoring system |
-| **Platform** | PC / web (keyboard or gamepad) |
-| **Resolution** | 384 × 216 native, integer-scaled ×5 to 1920 × 1080 |
-| **Grid** | 16 × 16 px tiles; level 1 is 96 × 14 tiles |
-| **Session length** | 3–5 minutes per run; built for replays and score chasing |
-| **Target audience** | Ages 10+. Casual-to-core players who like short, replayable platformers (fans of the "one more run" loop). Good for students to build: a single level, 4 enemy/hazard types and one core mechanic. |
+| **Assignment theme** | 3. No Risk? No Reward! |
+| **Genre** | 2D pixel-art platformer |
+| **Platform** | PC (keyboard) |
+| **Screen size** | 384 × 216 pixels, shown 5 times bigger (1920 × 1080) |
+| **Tile size** | 16 × 16 pixels |
+| **Length of one run** | About 2–3 minutes |
+| **Players** | 1 |
 
 ---
 
-## 1. Why this theme?
+## 1. Choosing the theme
 
-I compared all three themes before committing:
+I looked at all three themes:
 
-| Theme | Idea considered | Verdict |
+| Theme | Idea | Decision |
 |---|---|---|
-| One Button, Big Challenge | Auto-running candle that jumps on one key | Fun, but the depth comes almost entirely from level timing; scoring has no decisions. |
-| Think Your Way Out | Light/shadow switch puzzles | Strong, but puzzle design multiplies content cost: every room needs a unique solution. |
-| **No Risk? No Reward!** | **Glow mechanic: the more you carry, the brighter (and more hunted) you become** | **Chosen.** One simple rule creates a decision every few seconds, works in any room, and is easy to build. |
+| One Button, Big Challenge | A candle that runs by itself and jumps with one key | Fun, but there are not many choices for the player. |
+| Think Your Way Out | Puzzles with light and shadow | Good, but every room needs its own puzzle, so it is a lot of work. |
+| **No Risk? No Reward!** | **The more embers you carry, the brighter you glow, and the easier enemies find you** | **Chosen.** One simple rule gives the player a real choice again and again. |
 
-The theme is not just "collect stuff and avoid spikes". **The reward itself is the risk.** Every ember Pip picks up makes the score multiplier bigger *and* makes Pip easier to find, faster-burning and more costly to lose.
+In this game the reward is also the risk. Every ember makes your score bigger, but it also makes you easier to find and more costly to lose.
 
----
+## 2. Short description
 
-## 2. Elevator pitch
+You are Pip, the last burning candle in a flooded bell tower. Every ember you collect makes you brighter and worth more points, but it also makes the frost moths notice you. You can keep your points safe at a sconce, or keep going and hope you don't get hit.
 
-> *You are Pip, the last living candle in a flooded bell tower. Every ember you swallow makes you brighter, worth more and easier to hunt. Bank your glow at a sconce to keep it safe, or keep burning and hope the frost moths don't find you first.*
+## 3. Target audience
 
-## 3. Story and setting
+- Players aged 10 and up.
+- People who like short platform games they can replay to get a better score.
+- The game uses only two actions (move and jump), so it is easy to learn.
 
-For three hundred years the **Belfry of Saint Lume** rang every dusk, and its bell kept the winter fog off the harbour town below. One night the tide came in and never went out. The tower flooded, the bell fell silent, and the fog came back. With it came the **frost moths**, pale creatures that eat light.
+## 4. Story and setting
 
-The candles of the belfry went out one by one. Only **Pip**, a stubby tallow candle with a stubborn wick, is still burning. Scattered through the drowned halls are **embers**, the last sparks of the old candles. If Pip can climb to the top of the tower and ring the **Great Bell**, the fog will lift and every candle will light again.
+For 300 years, the Great Bell of the Belfry of Saint Lume rang every evening. The sound kept the cold fog away from the town below.
 
-**Setting:** a gothic bell tower, half underwater. Cold blue stone, black water and moonlight through tall windows. The only warm colours in the world are fire: Pip, embers, sconces and the bronze bell. That colour rule is the game's visual language (see §12): **warm = you / reward, cold = danger**.
+One night the sea flooded the tower and the bell stopped ringing. The fog came back, and with it came the **frost moths**, pale creatures that eat light. One by one, the candles in the tower went out.
 
-## 4. Main character: Pip
+Only **Pip** is still burning. The last sparks of the old candles, the **embers**, are spread around the tower. If Pip climbs to the top and rings the Great Bell, the fog will go away and the candles will light again.
+
+**Setting:** a dark, half-flooded stone bell tower with cold blue walls, black water and moonlight from tall windows. The only warm colours belong to fire: Pip, embers, sconces and the bronze bell. Warm colours mean you or a reward, and cold colours mean danger.
+
+## 5. Main character: Pip
 
 ![Pip character sheet](../02_Pixel_Art_Assets/preview/pip_character_sheet.png)
 
 | | |
 |---|---|
-| **Who** | A small living candle. Brave, a bit greedy, and very aware that wax doesn't last forever. |
-| **Purpose** | Reach the Great Bell and ring it before the wax runs out. |
-| **Look** | Cream wax body, two dot eyes, amber cheeks, a flame "hairdo" that streams back when running and turns ice-blue when hurt. |
-| **Sprite** | 16 × 16 px, 9 frames: idle (2), run (4), jump, fall, hurt. Hitbox 8 × 13 px. |
-| **Feedback** | Pip's light radius *is* the glow meter. The brighter Pip gets, the more of the room you can see, and the more moths can see you. |
+| **Who** | A small living candle. Brave, a little greedy, and always aware that the wax will run out. |
+| **Goal** | Reach the Great Bell and ring it before the wax runs out. |
+| **Look** | A cream wax body, two dot eyes, orange cheeks and a flame on top. The flame leans back when running and turns ice blue when Pip is hurt. |
+| **Sprite** | 16 × 16 pixels, 9 frames: idle (2), run (4), jump (1), fall (1), hurt (1). |
+| **Hitbox** | 8 × 13 pixels (the red box on the character sheet). |
 
-## 5. Objective
+## 6. Objective
 
-**Primary:** reach the **Great Bell** at the top-right of the tower and touch it to ring it.
-**Secondary:** finish with the highest score possible by collecting embers at a high glow, banking them safely, finding the 3 **Bell Shards** and arriving with wax to spare.
+- **Main goal:** reach the Great Bell at the top right of the tower and touch it.
+- **Extra goal:** get a high score by collecting embers, keeping them safe at sconces, finding the 3 bell shards and finishing with wax left.
 
-## 6. Core mechanic: GLOW
+## 7. Core mechanic: Glow
 
 ```
-            collect ember                          touch a lit sconce
-  GLOW x1 ───────────────► x2 ► x3 ► x4 ► x5  ───────────────────────► BANK
-     ▲                      (bigger points, more danger)               │
-     └───────────────────────────────────────────────────────────────────┘
-                      glow resets to x1, points are safe
+  collect an ember                        touch a sconce
+  GLOW x1 ──► x2 ──► x3 ──► x4 ──► x5 ─────────────────► BANK
+     ▲      (more points, more danger)                    │
+     └────────────────────────────────────────────────────┘
+                 glow goes back to x1, points are safe
 ```
 
-* **Glow level** = 1 + embers collected since the last bank (max **×5**).
-* **Ember value** = **20 × glow level at pickup** (20, 40, 60, 80, 100…).
-* Ember points go into an **AT RISK** pool shown in the HUD. They are **not** in your score yet.
-* **Banking:** touch a sconce (checkpoint). The AT RISK pool is added to your score, glow resets to ×1, and the sconce becomes your respawn point.
-* **The price of glow** (all three scale with glow level):
+- Your **glow level** starts at ×1. It goes up by 1 for every ember you collect, up to ×5.
+- An **ember** is worth **20 × your glow level** when you pick it up. Then your glow goes up by 1. For example, the first ember is worth 20, the second 40 and the third 60.
+- Ember points go into an **AT RISK** box on the screen. They are not in your score yet.
+- **Banking:** touch a sconce. The AT RISK points are added to your score, glow goes back to ×1, and the sconce becomes your restart point.
+- **If you get hit**, you lose all AT RISK points and your glow goes back to ×1.
 
-| Glow | Ember value | Moth detection radius | Wax drain per second |
+Higher glow also has a cost:
+
+| Glow | Ember value | Frost moth sees you from | Wax burns per second |
 |:---:|:---:|:---:|:---:|
 | ×1 | 20 | 3.5 tiles | 1.00 s |
 | ×2 | 40 | 4.0 tiles | 1.25 s |
@@ -82,145 +90,155 @@ The candles of the belfry went out one by one. Only **Pip**, a stubby tallow can
 | ×4 | 80 | 5.0 tiles | 1.75 s |
 | ×5 | 100 | 5.5 tiles | 2.00 s |
 
-* **Getting hit wipes the AT RISK pool** and resets glow to ×1. A greedy player carrying 400 unbanked points can lose all of it to one moth.
+So the player keeps asking: *"Do I grab one more ember, or go back to the sconce?"*
 
-The whole design follows from that: *keep going for one more ember at ×5, or go back to the sconce?*
+## 8. Controls
 
-## 7. Controls
+| Action | Keys |
+|---|---|
+| Move left / right | A / D or ← / → |
+| Jump (hold for a higher jump) | Space, W or ↑ |
+| Pause / back | Esc |
+| Choose a menu button | Enter |
 
-| Action | Keyboard | Gamepad |
-|---|---|---|
-| Move | A / D or ← / → | Left stick / D-pad |
-| Jump (hold for higher) | Space / W / ↑ | A (south button) |
-| Pause / back | Esc | Start |
-| Menu select | Enter / Space | A |
+Pip cannot attack. You can only avoid danger. Banking happens by touching a sconce, so no extra button is needed.
 
-No attack button. Pip can't fight, only avoid. Banking happens automatically on contact with a sconce, so the controls stay at **move + jump**.
+### Movement values
 
-### Movement tuning (so the level is buildable and fair)
+These values make sure every jump in the level is possible.
 
 | Value | Setting | Why |
 |---|---|---|
-| Run speed | 100 px/s | Crosses a 24-tile section in about 4 s |
-| Gravity | 900 px/s² | Snappy, short airtime |
-| Jump velocity | 310 px/s | Apex ≈ 53 px = **3.3 tiles** (level rule: max climb 3 tiles) |
-| Flat jump distance | ≈ 69 px = **4.3 tiles** | Level rule: max gap 4 tiles |
-| Variable jump | Releasing jump early multiplies upward speed by 0.5 | Short hops for low ceilings |
-| Coyote time | 0.08 s | Forgives late jumps off ledges |
-| Jump buffer | 0.10 s | Forgives early presses before landing |
-| Hurt invulnerability | 1.5 s (Pip flashes) | Prevents double hits |
+| Run speed | 100 px per second | Crosses one section (24 tiles) in about 4 seconds |
+| Gravity | 900 px per second² | Short, quick jumps |
+| Jump speed | 310 px per second | Highest jump is about 53 px, which is **3.3 tiles** |
+| Longest jump | About 69 px, which is **4.3 tiles** | The level never has a gap wider than 4 tiles |
+| Short jump | Letting go of jump early cuts the upward speed in half | Lets you make small hops |
+| Coyote time | 0.08 s | You can still jump just after walking off a ledge |
+| Jump buffer | 0.10 s | A jump pressed just before landing still works |
+| Safe time after a hit | 1.5 s (Pip flashes) | Stops you from being hit twice in a row |
 
-## 8. Rules
+## 9. Rules
 
-1. Pip starts with **3 lives (hearts)** and **3:00 of wax**.
-2. Wax burns every second; higher glow burns it faster (table above). **Wax drops** restore +20 s (max 3:00).
-3. **Embers** add points to the AT RISK pool and raise glow by 1 (max ×5).
-4. **Sconces** bank the AT RISK pool, reset glow to ×1 and set the respawn point. A sconce banks every time you touch it, not just the first time.
-5. **Bell Shards** are worth +250 each and are **banked instantly** (they're the safe reward for a risky path).
-6. **Frost moths / falling icicles** (enemy contact): −1 life, lose the AT RISK pool, glow → ×1, knockback, 1.5 s invulnerability. Play continues from where you are.
-7. **Spikes / water** (environment): −1 life, lose the AT RISK pool, glow → ×1, respawn at the last sconce.
-8. **Crumbling stones** fall 0.6 s after Pip lands on them and reappear after 3 s.
-9. Ringing the Great Bell **banks everything automatically**: it works as a final sconce.
+1. Pip starts with **3 lives** and **3:00 of wax**.
+2. Wax goes down every second. It goes down faster at a high glow (see the table above). A **wax drop** gives back 20 seconds, up to a maximum of 3:00.
+3. An **ember** adds points to the AT RISK box and raises glow by 1 (max ×5).
+4. A **sconce** banks your AT RISK points, sets glow to ×1 and saves your restart point. It works every time you touch it.
+5. A **bell shard** gives 250 points straight into your score. It is safe straight away.
+6. **Frost moths and falling icicles:** you lose 1 life and all AT RISK points, glow goes to ×1, and Pip is pushed back. You keep playing from where you are.
+7. **Spikes and water:** you lose 1 life and all AT RISK points, glow goes to ×1, and you restart at the last sconce.
+8. **Crumbling stones** fall 0.6 seconds after Pip lands on them. They come back after 3 seconds.
+9. Ringing the Great Bell banks all your AT RISK points, like a final sconce.
 
-## 9. Win and lose conditions
+## 10. Win and lose conditions
 
-| | Condition |
+| | When |
 |---|---|
-| **WIN** | Touch the Great Bell → Victory screen with score breakdown and rank. |
-| **LOSE** | Lives reach **0**, **or** wax reaches **0:00** → Game Over screen with banked score and progress. |
+| **Win** | Pip touches the Great Bell. The Victory screen shows your score and rank. |
+| **Lose** | Pip has **0 lives** left, **or** the wax reaches **0:00**. The Game Over screen shows your banked score and how far you got. |
 
-## 10. Enemies and obstacles
+## 11. Enemies and obstacles
 
-| | Name | Behaviour | Teaches / tests |
+| | Name | What it does | What it tests |
 |---|---|---|---|
-| ![](../02_Pixel_Art_Assets/sprites/hazards/frost_moth_0.png) | **Frost Moth** | Hovers around its home point (±8 px bob). When Pip enters its detection radius (3 tiles + 0.5 per glow level) it shows a "!" and chases at 45 px/s, about half Pip's speed. It gives up 6 tiles from home. | The core risk: glow makes them notice you sooner. |
-| ![](../02_Pixel_Art_Assets/sprites/hazards/icicle_0.png) | **Icicle** | Hangs from the ceiling. When Pip passes within 1 tile beneath, it shakes for 0.4 s, then drops. Regrows after 3 s. | Don't stop under it; the tell rewards players who watch. |
-| ![](../02_Pixel_Art_Assets/tileset/tiles/06_spikes.png) | **Iron Spikes** | Static floor hazard. | Jump timing. |
-| ![](../02_Pixel_Art_Assets/tileset/tiles/08_water_surface_0.png) | **Black Water** | Instant life loss; respawn at the sconce. | Gaps have weight. |
-| ![](../02_Pixel_Art_Assets/tileset/tiles/04_crumble.png) | **Crumbling Stone** | Falls 0.6 s after contact. | Keep moving; don't stop for greed. |
-| ![](../02_Pixel_Art_Assets/sprites/player/pip_idle_0.png) | **The Wax Timer** | Always running, faster at high glow. | Prevents "safe" slow play. |
+| ![](../02_Pixel_Art_Assets/sprites/hazards/frost_moth_0.png) | **Frost moth** | Floats near its home spot. When Pip comes close (3 tiles + 0.5 tiles per glow level), a "!" appears and it chases Pip at 45 px per second, about half of Pip's speed. It stops chasing 6 tiles away from home. | The main risk: the brighter you are, the sooner it sees you. |
+| ![](../02_Pixel_Art_Assets/sprites/hazards/icicle_0.png) | **Icicle** | Hangs from the ceiling. When Pip passes under it, it shakes for 0.4 seconds, then falls. It grows back after 3 seconds. | Don't stop under it. Watch for the shake. |
+| ![](../02_Pixel_Art_Assets/tileset/tiles/06_spikes.png) | **Spikes** | Iron spikes on the floor. | Jump timing. |
+| ![](../02_Pixel_Art_Assets/tileset/tiles/08_water_surface_0.png) | **Water** | Falling in costs a life. | Gaps are dangerous. |
+| ![](../02_Pixel_Art_Assets/tileset/tiles/04_crumble.png) | **Crumbling stone** | Falls 0.6 seconds after you land on it. | Keep moving. |
+| | **Wax timer** | Always running, faster at high glow. | Stops the player from playing too slowly and safely. |
 
-## 11. Collectibles and rewards
+## 12. Collectibles
 
-| | Item | Count in L1 | Effect |
+| | Item | In level 1 | What it does |
 |---|---|:---:|---|
-| ![](../02_Pixel_Art_Assets/sprites/collectibles/ember_0.png) | **Ember** | 24 | 20 × glow points (at risk) and +1 glow |
-| ![](../02_Pixel_Art_Assets/sprites/collectibles/wax_drop_0.png) | **Wax Drop** | 3 | +20 s wax |
-| ![](../02_Pixel_Art_Assets/sprites/collectibles/bell_shard_0.png) | **Bell Shard** | 3 | +250, banked instantly; each one sits on a risky route |
-| ![](../02_Pixel_Art_Assets/sprites/objects/sconce_lit_0.png) | **Sconce** | 3 | Checkpoint + bank |
+| ![](../02_Pixel_Art_Assets/sprites/collectibles/ember_0.png) | **Ember** | 24 | 20 × glow points (AT RISK), and glow +1 |
+| ![](../02_Pixel_Art_Assets/sprites/collectibles/wax_drop_0.png) | **Wax drop** | 3 | +20 seconds of wax |
+| ![](../02_Pixel_Art_Assets/sprites/collectibles/bell_shard_0.png) | **Bell shard** | 3 | +250 points, safe straight away. Each one is on a risky path. |
+| ![](../02_Pixel_Art_Assets/sprites/objects/sconce_lit_0.png) | **Sconce** | 3 | Checkpoint and bank |
 
-## 12. Scoring system
+## 13. Scoring
 
-| Source | Points |
+| Where points come from | Points |
 |---|---|
-| Ember | 20 × glow at pickup (only counts once banked) |
-| Bell Shard | +250 each (banked instantly) |
-| Wax remaining at the bell | +5 per second |
-| No-hit bonus | +500 if no lives lost |
+| Ember | 20 × glow when picked up (only counts after banking) |
+| Bell shard | 250 each |
+| Wax left when you ring the bell | 5 per second |
+| No lives lost | +500 bonus |
 
-**Example run (Victory screen):** 21 embers banked at an average glow of ×3.5 = **1,470**, plus 2 shards = **500**, plus 0:48 wax left = **240**, with 1 hit (no bonus). Total **2,210 → rank BLAZE**.
+**Example (the Victory screen):** 21 embers banked = 1,470 points, plus 2 shards = 500, plus 0:48 wax left = 240, with 1 hit (no bonus). The total is **2,210**, which gives the rank **Blaze**.
 
-| Rank | Score | Flames |
+| Rank | Score | Flames shown |
 |---|---|:---:|
 | Ash | 0 – 799 | 1 |
 | Ember | 800 – 1,499 | 2 |
 | Flame | 1,500 – 1,999 | 3 |
 | Blaze | 2,000 – 2,799 | 4 |
-| Sun | 2,800+ | 5 |
+| Sun | 2,800 and more | 5 |
 
-The theoretical maximum is about 3,900 (never banking, never hit, every shard). Reaching **Sun** means taking real risks.
+The highest possible score is about 3,900. To reach **Sun**, you have to take real risks.
 
-## 13. Difficulty progression
+## 14. Difficulty
 
-Level 1 has four 24-tile sections, each with one job (full annotated breakdown in [`03_Level_Design/LEVEL_DESIGN.md`](../03_Level_Design/LEVEL_DESIGN.md)):
+Level 1 has four sections. Each section is 24 tiles wide and has one job. The full explanation is in [`03_Level_Design/LEVEL_DESIGN.md`](../03_Level_Design/LEVEL_DESIGN.md).
 
-| Section | Role | New element | Pressure |
+| Section | Job | New thing | Danger |
 |---|---|---|---|
-| 1. The Wick-Room | **Teach** | Move, jump, embers, first sconce | No enemies; water gaps only |
-| 2. Moth Gallery | **Choose** | Frost moth, route fork, first shard | Safe low road vs rich high road |
-| 3. Flooded Nave | **Pressure** | Crumbling stones, icicles, moth over water | Must keep moving; wax pickups needed |
-| 4. Bell Climb | **Exam** | Everything combined over a spike floor | Max jumps, moth + icicle together |
+| 1. The Wick-Room | **Teach** | Moving, jumping, embers, first sconce | Only water gaps, no enemies |
+| 2. Moth Gallery | **Choose** | Frost moth, two paths, first shard | Safe low path or rich high path |
+| 3. Flooded Nave | **Pressure** | Crumbling stones, icicles, a moth over water | You must keep moving |
+| 4. Bell Climb | **Final test** | Everything together above a floor of spikes | Longest jumps, moth and icicle together |
 
-Difficulty saw-tooths: each section ramps up, then a sconce gives a moment of relief before the next ramp. Future levels can raise moth speed, add more moths per room, shorten the wax timer, or space sconces further apart.
+The difficulty goes up in each section and then drops at each sconce, so the player gets a short rest before the next part.
 
-## 14. Core gameplay loop
+## 15. Gameplay loop
 
 ```
- ┌─────────────► EXPLORE the room ───────────────┐
- │                                               ▼
- │                                     COLLECT embers (glow ↑, value ↑, danger ↑)
- │                                               │
- │                           ┌───────────────────┴───────────────────┐
- │                           ▼                                       ▼
- │                  PUSH ON (greed)                         BANK at a sconce (safe)
- │              more points, faster wax,                    score locked in, glow x1
- │              moths notice from further                           │
- │                           │                                       │
- │                 hit? ─ yes → lose AT RISK pool                    │
- │                           │                                       │
- └───────────────────────────┴───────────────────────────────────────┘
-                                   ...until you RING THE BELL
+ ┌──────────► EXPLORE the room ──────────┐
+ │                                        ▼
+ │                        COLLECT embers (more glow, more points, more danger)
+ │                                        │
+ │                  ┌─────────────────────┴───────────────────┐
+ │                  ▼                                         ▼
+ │          KEEP GOING (risky)                      BANK at a sconce (safe)
+ │      more points, wax burns faster,              points are safe, glow x1
+ │      moths see you from further away                       │
+ │                  │                                         │
+ │         hit? yes → lose the AT RISK points                 │
+ │                  │                                         │
+ └──────────────────┴─────────────────────────────────────────┘
+                        ...until you RING THE BELL
 ```
 
-**Moment to moment (seconds):** run, jump, grab embers.
-**Minute to minute:** bank or push on? High road or low road?
-**Run to run:** learn the moth ranges, find all three shards, chase a higher rank.
+- **Every few seconds:** run, jump and collect embers.
+- **Every minute:** bank now or keep going? High path or low path?
+- **Every run:** learn where the moths are, find all three shards and try for a better rank.
 
-## 15. Screens
+## 16. Screens
 
 | | | |
 |---|---|---|
 | ![](../04_UI_and_Prototype/screens/01_main_menu_1920x1080.png) Main menu | ![](../04_UI_and_Prototype/screens/02_gameplay_1920x1080.png) Gameplay | ![](../04_UI_and_Prototype/screens/03_victory_1920x1080.png) Victory |
-| ![](../04_UI_and_Prototype/screens/04_game_over_1920x1080.png) Game over | ![](../04_UI_and_Prototype/screens/05_settings_bonus_1920x1080.png) Settings (bonus) | ![](../04_UI_and_Prototype/screen_flow_diagram.png) Flow |
+| ![](../04_UI_and_Prototype/screens/04_game_over_1920x1080.png) Game over | ![](../04_UI_and_Prototype/screens/05_settings_bonus_1920x1080.png) Settings (extra) | ![](../04_UI_and_Prototype/screen_flow_diagram.png) Screen flow |
 
-## 16. Build scope (for the next assignment)
+## 17. Plan for building the game
 
-Everything below is already designed and has assets:
+This project is the design stage. The game itself is not programmed yet. Everything below already has a design and art:
 
-- [x] 1 player with 5 animations · [x] 2 enemy types · [x] 3 environmental hazards
-- [x] 3 collectible types · [x] checkpoint + exit objects · [x] 16-tile tileset
-- [x] 1 complete level (Tiled `.tmj` + CSV + ASCII) · [x] 5 UI screens + HUD kit + bitmap font
+- 1 player character with 5 animations
+- 2 enemy types and 3 environment hazards
+- 3 collectible types, a checkpoint and the goal
+- A 16-tile tileset
+- 1 complete level (as a Tiled map, CSV and text file)
+- 5 screens, a HUD, buttons and a pixel font
 
-**Suggested build order:** (1) tilemap + collision, (2) Pip movement with the tuning table, (3) embers + score + HUD, (4) sconces + banking + respawn, (5) hazards, (6) moths with glow-scaled detection, (7) wax timer, (8) screens and flow, (9) polish (screen shake, particles, sound).
-
-**Stretch goals:** a level select with 3 more towers; a "Cursed Wick" hard mode where banking costs 10 s of wax; online leaderboard.
+**Suggested order for building it:**
+1. Tilemap and collision
+2. Pip's movement, using the values in section 8
+3. Embers, score and HUD
+4. Sconces, banking and restarting
+5. Hazards
+6. Frost moths with glow-based detection
+7. Wax timer
+8. Screens and moving between them
+9. Extra polish (sound, particles)

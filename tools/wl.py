@@ -1,8 +1,9 @@
-"""WICKLIGHT shared art library.
+"""WICKLIGHT art library.
 
-Everything visual in the project is generated from this file so the style stays
-consistent: one master palette, one 16x16 grid, one bitmap font, one outline colour.
-Run `python3 tools/build_all.py` to regenerate every PNG in the project.
+All the pixel art in the project is made from this file: the colour palette,
+the sprites (drawn as text maps), the tiles, the pixel font and the UI pieces.
+Keeping everything in one file makes all the art look the same.
+To make all the PNG files again, run:  python3 tools/build_all.py
 """
 from PIL import Image, ImageDraw
 import random
@@ -385,7 +386,7 @@ def sconce_frames():
 
 
 def bell(ringing=False):
-    """32x32 Great Bell exit (procedural so the curve is smooth)."""
+    """The 32x32 Great Bell (the goal). Drawn with code so the curve is smooth."""
     im = Image.new("RGBA", (32, 32), (0, 0, 0, 0))
     px = im.load()
     # wooden yoke beam
@@ -713,7 +714,7 @@ def text_mask(s, sc=1, spacing=1):
 
 def draw_text(img, s, x, y, color='W', sc=1, outline='K', shadow=True, grad=None, spacing=1,
               anchor='l'):
-    """Pixel text with 1px (scaled) outline + drop shadow. grad=(top_key, bottom_key) for 2-band fill."""
+    """Draw pixel text with an outline and a shadow. grad=(top_colour, bottom_colour) gives two-colour text."""
     m = text_mask(s, sc, spacing)
     if anchor == 'c':
         x = x - m.width // 2
@@ -746,7 +747,7 @@ def draw_text(img, s, x, y, color='W', sc=1, outline='K', shadow=True, grad=None
 # UI PIECES
 # --------------------------------------------------------------------------
 def panel(w, h, style='stone'):
-    """9-slice style framed panel."""
+    """A UI panel with a border."""
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
     if style == 'stone':

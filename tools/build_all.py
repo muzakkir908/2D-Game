@@ -1,4 +1,4 @@
-"""Regenerate every WICKLIGHT asset, map and screen.  Usage:  python3 tools/build_all.py"""
+"""Makes every WICKLIGHT image and data file again.  Run:  python3 tools/build_all.py"""
 import os
 import sys
 

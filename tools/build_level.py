@@ -1,4 +1,4 @@
-"""Builds 03_Level_Design/: maps, annotated design sheet, Tiled export, CSV/ASCII data."""
+"""Makes the level files in 03_Level_Design/: the maps, the annotated map and the data files (Tiled, CSV, text)."""
 import csv
 import json
 import os
@@ -21,24 +21,24 @@ RISK_ROUTES = [
      (46, 6.5), (47, 10)],
 ]
 CALLOUTS = [
-    (3, 10, "START", "Flat, safe runway. Learn to move with zero threat."),
-    (5, 10, "FIRST EMBER", "Lies in your path. Glow rises to x2 on pickup."),
-    (6.5, 9, "FIRST GAP", "2-tile water gap. Embers trace the jump arc."),
-    (14, 9, "WIDER GAP", "3-tile gap. Same lesson, less margin."),
-    (18, 7, "OPTIONAL SHELF", "3 bonus embers, no enemy: practise greed."),
-    (22, 10, "SCONCE 1", "Checkpoint + BANK, taught right after greed."),
-    (28, 8, "THE FORK", "Low road: safe, few embers. High road: rich."),
-    (38, 3, "FIRST MOTH", "Guards the high road. More glow = more aggro."),
-    (35, 10, "SPIKE PIT", "The low road still asks for one clean jump."),
-    (44, 4, "BELL SHARD 1", "Prize at the end of the high road. +250."),
+    (3, 10, "START", "Flat and safe. Learn to move here."),
+    (5, 10, "FIRST EMBER", "Right in your path. Glow goes up to x2."),
+    (6.5, 9, "FIRST GAP", "2-tile water gap. Embers show the jump."),
+    (14, 9, "WIDER GAP", "3-tile gap. Same lesson, a bit harder."),
+    (18, 7, "OPTIONAL SHELF", "3 extra embers and no enemy. Safe practice."),
+    (22, 10, "SCONCE 1", "Checkpoint and bank, right after the shelf."),
+    (28, 8, "THE FORK", "Low path: safe. High path: more points."),
+    (38, 3, "FIRST MOTH", "Guards the high path. More glow, sees you sooner."),
+    (35, 10, "SPIKE PIT", "The low path still needs one good jump."),
+    (44, 4, "BELL SHARD 1", "Reward at the end of the high path. +250."),
     (50, 10, "SCONCE 2", "Bank before the hardest section."),
-    (56, 10, "PILLAR + WAX", "Refuel the wax timer before the water."),
+    (56, 10, "PILLAR + WAX", "Refill the wax timer before the water."),
     (60, 9, "CRUMBLE + ICE", "Stones fall 0.6s after landing. Shard 2 above."),
     (67, 5, "MOTH OVER WATER", "A hit here knocks you into the water."),
-    (73, 10, "SCONCE 3", "Final bank. Wise players cash in here."),
-    (78, 8, "THE CLIMB", "3-tile steps = max jump. Spikes punish misses."),
-    (84, 3, "MOTH + ICICLE", "Both threats at once: the final exam."),
-    (88, 3, "BELL SHARD 3", "Floats in the moth's airspace. Greed test."),
+    (73, 10, "SCONCE 3", "Last chance to bank your points."),
+    (78, 8, "THE CLIMB", "Each step is a full jump. Spikes below."),
+    (84, 3, "MOTH + ICICLE", "Both dangers at once: the final test."),
+    (88, 3, "BELL SHARD 3", "Right next to the moth. The biggest risk."),
     (92, 4, "GREAT BELL", "Touch it to ring the bell. Level complete!"),
 ]
 DIFFICULTY = [(0, 1), (5, 1), (6, 2), (12, 2), (13, 3), (16, 2), (21, 1), (24, 2), (32, 3),
@@ -96,7 +96,6 @@ def section_header(img, y):
 
 def main():
     full = L.render(lit_sconces=())
-    full.save(os.path.join(OUT, "level_01_map_1x.png"))
     wl.scale(full, 3).save(os.path.join(OUT, "level_01_map_clean_x3.png"))
 
     # ---------------- grid / coordinate map
@@ -156,16 +155,16 @@ def main():
     wl.draw_text(sheet, "DIFFICULTY", 6, gy + 4, color='O')
     for name, x in (("BANK", 22), ("BANK", 50), ("BANK", 73)):
         d.line([x * 16 + 8, gy, x * 16 + 8, gy + gh], fill=wl.rgba('F'))
-        wl.draw_text(sheet, "CHECKPOINT - RELIEF", x * 16 + 12, gy + 4, color='F', shadow=False)
-    wl.draw_text(sheet, "PEAK - FINAL EXAM", 88 * 16, gy + 4, color='Y', anchor='c')
+        wl.draw_text(sheet, "CHECKPOINT - REST", x * 16 + 12, gy + 4, color='F', shadow=False)
+    wl.draw_text(sheet, "HARDEST PART", 88 * 16, gy + 4, color='Y', anchor='c')
 
     # key
     ky = gy + gh + 6
     route(sheet, [(0.1, (ky - 8) / 16 + 0.0), (1.6, (ky - 8) / 16)], 'A')
-    wl.draw_text(sheet, "MAIN (SAFE) ROUTE", 36, ky - 3, color='A')
+    wl.draw_text(sheet, "MAIN (SAFE) PATH", 36, ky - 3, color='A')
     route(sheet, [(9, (ky - 8) / 16), (10.5, (ky - 8) / 16)], 'R')
-    wl.draw_text(sheet, "OPTIONAL RISK ROUTE (MORE EMBERS / SHARDS)", 180, ky - 3, color='R')
-    wl.draw_text(sheet, "ORANGE = LESSON/THREAT   BLUE = CHECKPOINT   GOLD = REWARD/GOAL", 560, ky - 3,
+    wl.draw_text(sheet, "RISKY PATH (MORE EMBERS AND SHARDS)", 180, ky - 3, color='R')
+    wl.draw_text(sheet, "ORANGE = LESSON OR DANGER   BLUE = CHECKPOINT   GOLD = REWARD OR GOAL", 560, ky - 3,
                  color='H')
 
     # legend columns

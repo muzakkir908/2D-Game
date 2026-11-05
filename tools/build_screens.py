@@ -1,4 +1,4 @@
-"""Builds the four UI screens (+ settings) at 384x216 native, exported x5 (1920x1080)."""
+"""Makes the UI screens. They are drawn at 384x216 and saved 5x bigger (1920x1080)."""
 import os
 import numpy as np
 from PIL import Image, ImageDraw
@@ -12,7 +12,7 @@ BAYER = np.array([[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]])
 
 
 def lighting(img, lights, base=175, steps=4, cold=False):
-    """Stepped, dithered pixel-art lighting. lights = [(x, y, radius, warm_bool)]."""
+    """Pixel-art lighting: darkens the screen and adds light circles. lights = [(x, y, radius, warm)]."""
     h, w = img.height, img.width
     yy, xx = np.mgrid[0:h, 0:w]
     lightv = np.zeros((h, w))
@@ -41,7 +41,7 @@ def lighting(img, lights, base=175, steps=4, cold=False):
 
 
 def frost_grade(img):
-    """Cold, desaturated grade for the Game Over screen."""
+    """Makes the picture cold and blue for the Game Over screen."""
     a = np.asarray(img.convert("RGB")).astype(float)
     lum = a @ np.array([0.3, 0.55, 0.15])
     tint = np.array(wl.RGB['I'], float) / 255
@@ -141,7 +141,7 @@ def remove_entities(cells):
 
 
 def gameplay_scene(frame=0):
-    """Section 2, Pip mid high-road at glow x3, moth closing in."""
+    """Section 2 of the level: Pip on the high path at glow x3, with the moth coming close."""
     collected = [(31, 7), (34, 4)] + \
                 [(x, y) for (c, x, y) in L.entities() if c == 'e' and x < 24]
     rows = remove_entities(collected)
@@ -281,7 +281,7 @@ def screen_menu(frame=0):
     cur = wl.from_map(["..K..", ".KAK.", "KAYOK", "KOWOK", ".KRK."])
     img.alpha_composite(cur, (SW // 2 - 64, 89))
     img.alpha_composite(cur, (SW // 2 + 58, 89))
-    wl.draw_text(img, "BEST 002980", 8, SH - 12, color='A')
+    wl.draw_text(img, "BEST 001980", 8, SH - 12, color='A')
     wl.draw_text(img, "A  NO RISK? NO REWARD!  GAME  -  V0.1", SW - 8, SH - 12, color='H',
                  anchor='r', shadow=False)
     return img
@@ -311,7 +311,7 @@ def screen_victory(frame=0):
         ("BELL SHARDS", "2/3", "+500"),
         ("WAX REMAINING", "0:48", "+240"),
         ("HITS TAKEN", "1", "+0"),
-        ("TIME", "3:12", ""),
+        ("TIME", "2:10", ""),
     ]
     for i, (k, v, pts) in enumerate(stats):
         yy = py + 47 + i * 11
@@ -470,19 +470,15 @@ def flow_diagram():
 
 
 def main():
-    os.makedirs(os.path.join(OUT, "screens", "native_384x216"), exist_ok=True)
+    os.makedirs(os.path.join(OUT, "screens"), exist_ok=True)
     pimg = os.path.join(OUT, "prototype", "img")
     os.makedirs(pimg, exist_ok=True)
     for name, fn in SCREENS:
         img = fn(0)
-        img.save(os.path.join(OUT, "screens", "native_384x216", f"{name}.png"))
         wl.scale(img, SCALE).save(os.path.join(OUT, "screens", f"{name}_1920x1080.png"))
         frames = [fn(f) for f in range(4)]
         for i, fr in enumerate(frames):
             fr.save(os.path.join(pimg, f"{name}_f{i}.png"))
-        big = [wl.scale(f, 2).convert("RGB") for f in frames]
-        big[0].save(os.path.join(OUT, "screens", f"{name}_animated.gif"), save_all=True,
-                    append_images=big[1:], duration=180, loop=0)
     for lbl, w in (("PLAY", 104), ("SETTINGS", 104), ("EXIT", 104), ("BACK", 80),
                    ("REPLAY", 100), ("RETRY", 100), ("MAIN MENU", 100)):
         wl.button(lbl, w=w, selected=True).save(

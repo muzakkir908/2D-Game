@@ -1,137 +1,138 @@
-# Level 1: The Drowned Belfry · Level Design
+# Level 1: The Drowned Belfry
+### Level Design
 
 ![Annotated level layout](level_01_annotated_design_x2.png)
 
 | | |
 |---|---|
-| **Size** | 96 × 14 tiles (1536 × 224 px), 16 px tiles |
-| **Structure** | 4 sections × 24 tiles. Each section is exactly one screen wide at 384 × 216, so the camera only ever shows one "room's worth" of ideas. |
+| **Size** | 96 × 14 tiles (1536 × 224 pixels). Each tile is 16 × 16 pixels. |
+| **Sections** | 4 sections, each 24 tiles wide. One section fills exactly one screen. |
 | **Contents** | 24 embers · 3 wax drops · 3 bell shards · 4 frost moths · 4 icicles · 3 sconces · 1 Great Bell |
-| **Par time** | about 2:30 for a safe run, 3:00+ for a full-collection run (wax starts at 3:00) |
-| **Design rules** | Max climb **3 tiles**, max gap **4 tiles** (matches Pip's jump: 3.3 tiles high, 4.3 tiles long). Every jump in the level is within those limits. |
+| **Target time** | About 1:30 for a safe run, about 2:15 if you collect everything. The wax starts at 3:00. |
+| **Jump rules** | Platforms are never more than **3 tiles** higher than the last one, and gaps are never wider than **4 tiles**. Pip can jump 3.3 tiles high and 4.3 tiles far, so every jump is possible. |
 
-**Files**
+## Files in this folder
 
 | File | What it is |
 |---|---|
-| `level_01_annotated_design_x2.png` | Full map + main route (amber) + risk routes (red) + 19 numbered callouts + difficulty curve |
-| `level_01_map_clean_x3.png` | Clean art-only map |
-| `level_01_map_grid_coords.png` | Map with tile grid and X/Y coordinates for rebuilding in an engine |
-| `section_1…4_*_x3.png` | Close-ups of each section with annotations |
-| `data/level_01.tmj` | **Tiled** map (Background + Terrain tile layers, Entities object layer) |
-| `data/level_01_terrain.csv`, `data/level_01_background.csv` | Tile index grids (−1 = empty), for engines without a Tiled importer |
-| `data/level_01_entities.json` | Every object with pixel and tile position |
-| `data/level_01.txt` | The ASCII source the level is built from (easy to read and edit) |
+| `level_01_annotated_design_x2.png` | The full map with the main path (orange), the risky paths (red), 19 numbered notes and a difficulty line |
+| `level_01_map_clean_x3.png` | The map without notes |
+| `level_01_map_grid_coords.png` | The map with a tile grid and X/Y numbers, for rebuilding it in a game engine |
+| `section_1…4_*_x3.png` | Close-ups of each section |
+| `data/level_01.txt` | The level as text (one letter per tile). The images are made from this file. |
+| `data/level_01.tmj` | The level for the **Tiled** map editor |
+| `data/level_01_terrain.csv`, `data/level_01_background.csv` | Tile numbers for each layer (−1 means empty) |
+| `data/level_01_entities.json` | The position of every object |
 
-### Legend (ASCII source)
+### Letters used in `level_01.txt`
 
 ```
-#  stone (auto top/fill)     =  wooden plank (one-way)   %  crumbling stone
-^  iron spikes (hazard)      ~  water surface (hazard)   w  deep water
-c  hanging chain (decor)     P  player start             e  ember
-d  wax drop                  b  bell shard               M  frost moth
-I  icicle (ceiling hazard)   S  sconce checkpoint        G  great bell (2x2)
+#  stone            =  wooden plank       %  crumbling stone
+^  spikes           ~  water surface      w  deep water
+c  chain (decor)    P  player start       e  ember
+d  wax drop         b  bell shard         M  frost moth
+I  icicle           S  sconce             G  Great Bell (2x2 tiles)
 ```
 
 ---
 
-## Overall structure: beginning, middle, end
+## Beginning, middle and end
 
 ```
 Difficulty
  10 |                                                         ___
-    |                                              __/‾‾‾‾‾‾‾‾   |  ← peak: final exam
+    |                                              __/‾‾‾‾‾‾‾‾   |  ← hardest part
     |                          /‾‾‾‾\        /‾‾‾‾                |
     |            /‾‾‾\        /      \      /                     |
     |  __/‾‾\___/     \_____/        \____/                      |
-  1 |_/  TEACH    ↑   CHOOSE    ↑   PRESSURE   ↑     EXAM         |
-     0          sconce 1      sconce 2      sconce 3            bell (96)
+  1 |_/  TEACH    ↑   CHOOSE    ↑   PRESSURE   ↑   FINAL TEST     |
+     0         sconce 1      sconce 2      sconce 3            bell (96)
 ```
 
-Each section **introduces → combines → tests**, and every section ends at a sconce. After each spike in difficulty the player gets a "breath" and a chance to bank, so the decision to bank or push on comes up three times, with higher stakes each time.
+Each section first shows the player something new, then mixes it with older things, then tests it. Every section ends with a sconce. After a hard part, the player gets a short rest and a chance to bank. This choice comes up three times, and the stakes get higher each time.
 
 ---
 
-## Section 1: The Wick-Room (tiles 0–23) · TEACH
+## Section 1: The Wick-Room (tiles 0–23) · Teach
 
 ![](section_1_the_wick_room_x3.png)
 
 | # | Where | What and why |
 |---|---|---|
-| **1 START** | (3,10) | Flat, enclosed runway with a wall behind the player. Nothing can hurt you here, so the first 2 seconds are just "learn to move". |
-| **2 FIRST EMBER** | (5,10) | Sits directly in the walking path, so it's impossible to miss. On pickup the GLOW meter fills to ×2 and the light radius grows. That teaches the core mechanic with zero words. |
-| **3 FIRST GAP** | cols 6–7 | A 2-tile gap over water. Two embers float in an **arc over the gap**, so following the embers *is* the jump. This teaches that jumping is needed and that water hurts. |
-| **4 WIDER GAP** | cols 13–15 | 3 tiles: the same lesson with less margin. One ember marks the apex. |
-| **5 OPTIONAL SHELF** | planks at cols 16–20 | The first optional reward: 3 embers on a shelf you need a full-height jump to reach. **No enemy here**, so the first taste of greed is safe practice. |
-| **6 SCONCE 1** | (22,10) | Placed right after the shelf, so the player reaches it carrying 5–8 embers at high glow. Touching it shows the BANK animation: score jumps, glow resets. **This teaches banking at the moment it matters most.** |
+| **1 START** | (3,10) | A flat, safe floor with a wall behind the player. Nothing can hurt you, so the first seconds are only for learning to move. |
+| **2 FIRST EMBER** | (5,10) | It is right in your path, so you can't miss it. When you collect it, the glow meter goes to ×2 and Pip's light gets bigger. This teaches the main mechanic without any text. |
+| **3 FIRST GAP** | tiles 6–7 | A 2-tile gap over water. Two embers float in an arc over the gap, so following the embers is the jump. This teaches jumping and that water is dangerous. |
+| **4 WIDER GAP** | tiles 13–15 | A 3-tile gap. The same lesson, but harder. One ember marks the top of the jump. |
+| **5 OPTIONAL SHELF** | planks at tiles 16–20 | The first optional reward: 3 embers on a shelf you need a full jump to reach. **There is no enemy here**, so the first taste of greed is safe. |
+| **6 SCONCE 1** | (22,10) | It comes right after the shelf, so the player arrives with up to 8 embers and a high glow. Touching it shows the score jump and the glow reset. **This teaches banking at the moment it matters most.** |
 
-**How you can fail here:** only by falling into water (−1 life, respawn at start). Low stakes on purpose.
+**How you can fail here:** only by falling in the water (−1 life, restart at the start). The danger is low on purpose.
 
 ---
 
-## Section 2: Moth Gallery (tiles 24–47) · CHOOSE
+## Section 2: Moth Gallery (tiles 24–47) · Choose
 
 ![](section_2_moth_gallery_x3.png)
 
 | # | Where | What and why |
 |---|---|---|
-| **7 THE FORK** | plank at (27–29, 8) | The level splits. **Low road:** walk the floor, 3 embers, a wax drop, one spike pit. **High road:** jump up the planks, 5 embers + a bell shard, but a moth patrols it. Both routes are visible at once, so the choice is informed. |
-| **8 FIRST MOTH** | (38,3) | Hovers just above the high road's ember line. At glow ×1 its detection radius (3.5 tiles) barely reaches the planks. At ×4–5 it covers the whole plank. Players who arrive greedy from section 1 (they skipped the sconce) get chased; players who banked can slip past. **The sconce lesson is tested right away.** |
-| **9 SPIKE PIT** | cols 34–36 | The low road isn't free: one 3-tile spike jump. It also punishes falling off the high road. |
-| **10 BELL SHARD 1** | (44,4) | At the end of the high road, across a 2-tile hop. It's banked instantly, so the high road pays out even if the moth hits you afterwards. |
+| **7 THE FORK** | plank at (27–29, 8) | The path splits in two. **Low path:** walk along the floor, 3 embers, 1 wax drop and one spike pit. **High path:** jump up the planks, 4 embers and a bell shard, but a frost moth guards it. You can see both paths at once, so you can choose. |
+| **8 FIRST MOTH** | (38,3) | It floats just above the embers on the high path. At glow ×1 it only sees 3.5 tiles, so it barely reaches the planks. At ×4 or ×5 it sees the whole plank. A player who skipped sconce 1 arrives with a high glow and gets chased. A player who banked can sneak past. **This tests the banking lesson straight away.** |
+| **9 SPIKE PIT** | tiles 34–36 | The low path isn't free: there is one 3-tile spike jump. The spikes also punish falling off the high path. |
+| **10 BELL SHARD 1** | (44,4) | At the end of the high path, across a 2-tile jump. It is safe straight away, so the high path pays off even if the moth hits you later. |
 
-**Where rewards are placed:** the riskier route has roughly double the points (5 embers at climbing glow + 250) versus the low road (3 embers + wax). The wax drop on the low road is a quiet hint that it's the "steady" route.
+**Where the rewards are:** the risky high path is worth about twice as much (4 embers at a rising glow plus 250 for the shard). The low path has 3 embers and the wax drop. The wax drop is a hint that this is the steady path.
 
-**How you can fail here:** moth contact (lose AT RISK pool), spikes (life + respawn at sconce 1).
+**How you can fail here:** touching the moth (lose AT RISK points) or the spikes (lose a life and restart at sconce 1).
 
 ---
 
-## Section 3: The Flooded Nave (tiles 48–71) · PRESSURE
+## Section 3: The Flooded Nave (tiles 48–71) · Pressure
 
 ![](section_3_flooded_nave_x3.png)
 
 | # | Where | What and why |
 |---|---|---|
-| **11 SCONCE 2** | (50,10) | Placed *before* the hard part so a failure here doesn't send you back through section 2. |
-| **12 PILLAR + WAX** | (55–56, 10) | A safe stepping stone with a wax drop: refuel before the most time-sensitive stretch. |
-| **13 CRUMBLE + ICE** | crumbles at (59–60, 9) and (63–64, 9) | The only footholds over 11 tiles of water **fall 0.6 s after landing**, and **icicles hang above them**. The player can't wait, and can't stand still to line up a jump. **Bell Shard 2** sits 2 tiles above the first crumble, so you have to jump *up* from a collapsing tile: a clear greed test with a short timer. |
-| **14 MOTH OVER WATER** | (67,5) | Guards the landing. Getting hit here causes knockback, which can push you into the water: one mistake can cost twice. A high-glow player gets noticed from the crumbles. |
+| **11 SCONCE 2** | (50,10) | It is placed *before* the hard part, so a mistake here doesn't send you back through section 2. |
+| **12 PILLAR + WAX** | (55–56, 10) | A safe stone pillar with a wax drop, so you can refill before the part where time matters most. |
+| **13 CRUMBLE + ICE** | crumbling stones at (59–60, 9) and (63–64, 9) | The only places to stand over 11 tiles of water **fall 0.6 seconds after you land**, and **icicles hang above them**. You can't wait, and you can't stand still to plan a jump. **Bell Shard 2** is 2 tiles above the first crumbling stone, so you have to jump up from a falling stone to get it. |
+| **14 MOTH OVER WATER** | (67,5) | It guards the landing. If it hits you here, the push-back can knock you into the water, so one mistake can cost twice. With a high glow, the moth sees you while you are still on the crumbling stones. |
 
-**Difficulty increase:** the first section where standing still is punished (crumbles, wax) and where enemy contact can chain into an environmental death.
+**Why it is harder:** this is the first section where standing still is punished (crumbling stones and wax), and where a moth hit can lead to falling in the water.
 
 ---
 
-## Section 4: Bell Climb (tiles 72–95) · EXAM
+## Section 4: Bell Climb (tiles 72–95) · Final test
 
 ![](section_4_bell_climb_x3.png)
 
 | # | Where | What and why |
 |---|---|---|
-| **15 SCONCE 3** | (73,10) | The last bank. Everything after this is a vertical climb over a spike floor, so smart players cash in here. The design hint is that the floor ahead is 11 tiles of spikes. |
-| **16 THE CLIMB** | ledges (77–79, 8) → (81–83, 5) → plank (86–88, 5) | Each step is exactly 3 tiles up, Pip's maximum jump. Missing any step drops you onto the spikes. The jump rules from section 1 now have to be executed perfectly. |
-| **17 MOTH + ICICLE** | moth (84,3), icicle (87,2), moth (89,7) | The first time both threat types share a screen. The moth above the gap and the icicle over the plank force the player to time the jump *between* threats. |
-| **18 BELL SHARD 3** | (88,3) | Floats directly in the moth's airspace above the plank. One hop up to grab it, at the worst possible moment. The ultimate risk/reward test. |
-| **19 THE GREAT BELL** | (92–93, 4–5) on the tower ledge | Touch to ring it: auto-banks everything and ends the level. A 2-tile gap from the plank, so the final jump is easy. The level ends on a satisfying moment, not a frustrating one. |
+| **15 SCONCE 3** | (73,10) | The last chance to bank. After this you climb over a floor of spikes, so smart players bank here. The 11 tiles of spikes ahead are the hint. |
+| **16 THE CLIMB** | ledges (77–79, 8) → (81–83, 5) → plank (86–88, 5) | Each step is exactly 3 tiles higher, which is Pip's highest jump. If you miss a step, you fall onto the spikes. The jumping lessons from section 1 now have to be done perfectly. |
+| **17 MOTH + ICICLE** | moths at (84,3) and (89,7), icicle at (87,2) | The first time both kinds of danger are on the same screen. You have to time your jump between them. |
+| **18 BELL SHARD 3** | (88,3) | It floats right in the moth's area above the plank. Grabbing it means jumping at the worst moment. This is the biggest risk in the level. |
+| **19 THE GREAT BELL** | (92–93, 4–5) on the tower ledge | Touch it to ring it. It banks all your points and ends the level. The last jump is only 2 tiles, so the level ends on a happy moment, not a frustrating one. |
 
 ---
 
-## Player route summary
+## Player paths
 
-* **Main (amber) route:** floor → gap jumps → sconce 1 → low road → spike jump → sconce 2 → pillar → crumbles → sconce 3 → three-step climb → bell. Uses only 2–3 tile jumps. A first-time player can finish with about 15 embers.
-* **Risk (red) routes:** the section 1 shelf and the section 2 high road, plus the shard jumps in sections 3 and 4. Taking all of them is needed for rank **Sun**.
+- **Main path (orange):** floor → water gaps → sconce 1 → low path → spike jump → sconce 2 → pillar → crumbling stones → sconce 3 → three-step climb → bell. It only uses 2–3 tile jumps. A first-time player can finish with about 15 embers.
+- **Risky paths (red):** the shelf in section 1, the high path in section 2, and the shard jumps in sections 3 and 4. You need all of them to get the rank **Sun**.
 
-## How the level teaches (without text)
+## How the level teaches without text
 
 | Lesson | Taught by | Tested by |
 |---|---|---|
-| Embers = glow | Ember 2 in your path | Section 2 fork |
-| Jumping | Ember arc over gap 1 | Bell Climb steps |
-| Banking | Sconce right after the bonus shelf | Moth that punishes high glow straight after |
-| Water/spikes hurt | Shallow 2-tile water gap | 11-tile spike floor in the climb |
-| Moths chase brightness | Single moth with a clear "!" tell | Moth + icicle combo |
-| Keep moving | Wax timer | Crumbling stones |
+| Embers give glow | Ember 2, in your path | The fork in section 2 |
+| Jumping | The ember arc over gap 1 | The steps in the Bell Climb |
+| Banking | Sconce 1, right after the bonus shelf | The moth right after it, which punishes a high glow |
+| Water and spikes hurt | The small 2-tile water gap | The 11-tile spike floor in the climb |
+| Moths follow light | One moth with a clear "!" warning | The moth + icicle combination |
+| Keep moving | The wax timer | The crumbling stones |
 
-## Success and failure states
+## Winning and losing
 
-* **Succeed:** reach the bell with ≥1 life and >0:00 wax. Score = banked points + shards + wax bonus (+ no-hit bonus).
-* **Fail:** lose 3 lives (hazards respawn you at the last sconce, enemies knock you back), or let the wax run out. Lost AT RISK points are gone for good, so even a successful run can be "poor" if the player was greedy at the wrong moment.
+- **Win:** reach the bell with at least 1 life and some wax left. Your score is your banked points + shards + wax bonus (+ the no-hit bonus).
+- **Lose:** lose all 3 lives, or let the wax run out. Spikes and water send you back to the last sconce. Enemies push you back. AT RISK points that you lose are gone for good, so you can finish the level and still get a low score if you were greedy at the wrong time.
