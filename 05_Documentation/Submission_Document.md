@@ -44,12 +44,10 @@ WICKLIGHT – The Little Candle is a small 2D pixel-art platform game. The playe
 | | | Figma prototype | Figma link above |
 | | | UI and prototype guide | [`04_UI_and_Prototype/UI_AND_PROTOTYPE.md`](../04_UI_and_Prototype/UI_AND_PROTOTYPE.md) |
 | | | HTML prototype (extra) | [`04_UI_and_Prototype/prototype/index.html`](../04_UI_and_Prototype/prototype/index.html) |
-| Other | – | AI use note | [`AI_Use_Note.md`](AI_Use_Note.md) |
 
 ## Before you submit on Moodle
 
 - [ ] Fill in your name, student number, course, assignment title and date.
-- [ ] Rebuild the Figma prototype: run the WICKLIGHT plugin in the Figma desktop app ([Figma Rebuild Guide](../04_UI_and_Prototype/Figma_Rebuild_Guide.md)), then test it in Present mode.
+- [ ] Open the Figma file and test every link in Present mode (use the mouse).
 - [ ] Set Figma sharing to "Anyone with the link can view" and paste the link above.
 - [ ] Check that your teacher can open the GitHub link, and paste it above.
-- [ ] Read the [AI use note](AI_Use_Note.md), fill in the tool name if asked, and write "What I learned".

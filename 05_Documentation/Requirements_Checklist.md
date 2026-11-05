@@ -23,4 +23,3 @@
 | 19 | Game Over screen | `04_UI_and_Prototype/screens/04_game_over.png` |
 | 20 | Interactive Figma prototype | Figma link in `Submission_Document.md` (**must be rebuilt: run the plugin in `04_UI_and_Prototype/figma_plugin/`, see `Figma_Rebuild_Guide.md`**) |
 | 21 | Submission document | `05_Documentation/Submission_Document.md` |
-| 22 | AI use note | `05_Documentation/AI_Use_Note.md` |

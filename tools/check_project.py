@@ -226,7 +226,7 @@ old = []
 for f in docs + [os.path.join(ROOT, "04_UI_and_Prototype", "prototype", "index.html")]:
     text = open(f).read().lower()
     for w in OLD_WORDS:
-        if w in text and not f.endswith("Verification_Report.md"):
+        if w in text:
             old.append(f"{os.path.relpath(f, ROOT)}: '{w}'")
 check("No words from the old, complicated version are left in the documents or code", not old, old)
 
@@ -243,7 +243,7 @@ REQUIRED_DOCS = ["01_Game_Concept/WICKLIGHT_Game_Design_Document.md", "02_Pixel_
                  "04_UI_and_Prototype/Figma_Rebuild_Guide.md",
                  "05_Documentation/Import_Guide_Piskel_and_Engines.md",
                  "05_Documentation/Requirements_Checklist.md", "05_Documentation/Submission_Document.md",
-                 "05_Documentation/Verification_Report.md", "05_Documentation/AI_Use_Note.md"]
+                 ]
 missing_docs = [d for d in REQUIRED_DOCS if not os.path.exists(os.path.join(ROOT, d))]
 check("All required documents exist (%d)" % len(REQUIRED_DOCS), not missing_docs, missing_docs)
 
