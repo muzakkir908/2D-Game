@@ -1,6 +1,6 @@
 # Figma Rebuild Guide
 
-The old Figma file I made is in a different Figma account, and it shows the old game. **Do not use it.** Make a new, empty Design file in your own Figma account and use the plugin below. (If you prefer to do it by hand, the manual way is further down.)
+An old Figma file (made earlier by the AI assistant) is in a different Figma account, and it shows the old game. **Do not use it.** Make a new, empty Design file in your own Figma account and use the plugin below. (If you prefer to do it by hand, the manual way is further down.)
 
 ## ⭐ Quick way: run the WICKLIGHT plugin (about 3 minutes)
 

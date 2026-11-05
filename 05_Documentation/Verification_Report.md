@@ -1,5 +1,7 @@
 # Verification Report
 
+*This report was written by the AI assistant that helped make this project (see `AI_Use_Note.md`). In this report, "I" and "me" mean the AI assistant.*
+
 This report shows what was checked, how it was checked, and what is still left to do.
 
 **Status words:**

@@ -1,26 +1,28 @@
 # Note About AI Use
 
-> **Check this note against your college's rules before you submit.** Some colleges ask you to name the AI tool, explain how you used it, or add the prompts you wrote. Fill in the parts in *italics* and change anything that does not match your college's rules.
+I used an AI assistant to help me make this project. This note shows what the AI did and what I did, so it is clear which parts are my own work.
 
-## What the AI assistant did
+*(If my college asks for the name of the AI tool, I write it here: ______________________)*
 
-I used an AI assistant to help me with this project. I wrote the instructions: what the game should be, what to change and what to simplify. The AI assistant then:
-- wrote the game concept document and the other documents,
-- wrote the Python programs in `tools/`, which draw the pixel art, the level map and the screens,
-- designed the level from my rules (one small level, 5 embers, spikes, moths and one door),
-- made the HTML prototype and the test scripts,
-- made the small Figma plugin that builds the Figma prototype,
-- tested the `.piskel` files in the Piskel editor (see `piskel_test_evidence/`).
+## Who did what
 
-The pixel art was not drawn by hand in Piskel. It was written as text maps in code (see `How_To_Remake_The_Files.md`), then saved as PNG and `.piskel` files.
+| Part of the project | Where it is | What the AI did | What I did |
+|---|---|---|---|
+| Game idea and rules | `01_Game_Concept/` | Wrote the concept and rules document. | Chose the theme, decided the game had to be simple (one level, 5 embers, moths, spikes, 3 lives, 60 seconds, one door) and checked the document. |
+| Pixel art | `02_Pixel_Art_Assets/` | Made all the sprites, tiles, background, sprite sheets, palette and `.piskel` files. The art was written as text maps in Python code, not drawn by hand. | Asked for simple art that a beginner could make in Piskel and checked the result. |
+| Piskel check | `05_Documentation/piskel_test_evidence/` | Opened all `.piskel` files in the Piskel editor, edited them and exported PNGs to check them. | – |
+| Level design | `03_Level_Design/` | Designed the level, wrote the notes on the map and checked that every jump is possible. | Gave the rules for the level (small, one route, 5 embers, 2–3 spike groups, 1–2 moths, one exit) and checked the map. |
+| Game screens | `04_UI_and_Prototype/screens/` | Made the 4 screens (Main Menu, Gameplay, Victory, Game Over). | Checked the screens and asked for changes. |
+| HTML prototype | `04_UI_and_Prototype/prototype/` | Made the clickable HTML version and a test for it. | – |
+| Figma prototype | `04_UI_and_Prototype/figma_plugin/` and my Figma file | Made a small Figma plugin that builds the screens and links. | Made the Figma file, ran the plugin in Figma, tested every link in Present mode, found that SETTINGS/EXIT and the arrow keys do not work as game controls, and set up sharing. |
+| Python tools and tests | `tools/` | Wrote all the code. | – |
+| Documents | all `.md` files | Wrote all the documents. `05_Documentation/Verification_Report.md` was written by the AI, so its "I" means the AI. | Asked for simple English, read the documents and filled in my details. |
+| GitHub | the repository | Made the commits. The commits show my name because it is my repository, but the AI made the changes. | Owns the repository, deleted an old branch and checked the files. |
 
-## What I did
+## How I worked with the AI
 
-*(Write what you did yourself. For example:)*
-- *I chose the game idea and asked for the simpler version.*
-- *I checked the screens, the level and the documents.*
-- *I ran the Figma plugin and tested the prototype in Present mode.*
+I wrote instructions for the AI: what the game should be, what to make simpler and what to fix. I checked the results and asked for changes several times. For example, I asked for a much simpler game when the first version was too complicated.
 
-## AI tool used
+## What I learned
 
-*(If your college asks for it, write the name of the AI tool here.)*
+*(Write 2–4 sentences in your own words. For example: what you learned about level design, pixel art or prototyping, and what you would do differently.)*
