@@ -1,5 +1,7 @@
 # Assignment Requirements Checklist
 
+In rows 3–13, the paths start inside `02_Pixel_Art_Assets/`.
+
 | # | Requirement | Where to find it |
 |:---:|---|---|
 | 1 | Game concept and rules document | `01_Game_Concept/WICKLIGHT_Game_Design_Document.md` |
@@ -21,5 +23,5 @@
 | 17 | Gameplay screen | `04_UI_and_Prototype/screens/02_gameplay.png` |
 | 18 | Victory screen | `04_UI_and_Prototype/screens/03_victory.png` |
 | 19 | Game Over screen | `04_UI_and_Prototype/screens/04_game_over.png` |
-| 20 | Interactive Figma prototype | Figma link in `Submission_Document.md` (**must be rebuilt: run the plugin in `04_UI_and_Prototype/figma_plugin/`, see `Figma_Rebuild_Guide.md`**) |
+| 20 | Interactive Figma prototype | Figma link in `Submission_Document.md` (**you need to make it in your own Figma account: run the plugin in `04_UI_and_Prototype/figma_plugin/`, see `Figma_Rebuild_Guide.md`**) |
 | 21 | Submission document | `05_Documentation/Submission_Document.md` |

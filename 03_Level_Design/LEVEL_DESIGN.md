@@ -57,13 +57,13 @@
 ## Beginning, middle and end
 
 - **Beginning (notes 1–3):** flat ground, one easy ember and one small spike jump. The player learns to move and jump.
-- **Middle (notes 4–6):** the platforms, the first moth and the spike pits. This is where the challenge goes up.
+- **Middle (notes 4–6):** the platforms, the first moth and the spike pits. This is where the level gets harder.
 - **End (notes 7–8):** one last moth to wait for, the last ember and the exit door.
 
 ## Where things are and why
 
 - **Embers:** each one is a little harder to get than the one before. Ember 1 is on the ground, ember 2 needs a jump, ember 3 is next to a moth, ember 4 is high up, and ember 5 is next to the second moth.
-- **Spikes:** they are under the jumps, so a missed jump is punished.
+- **Spikes:** they are under the jumps. If you miss a jump, you land on spikes and lose a life.
 - **Moths:** one guards the high platform (the middle of the level), and one guards the way to the door (the end).
 - **Exit door:** it is at the far right, at the end of the route, so the player always knows where to go.
 
@@ -79,4 +79,4 @@ Every jump on the route is possible. The candle can jump 3 tiles up and across a
 | High platform → platform 3 | down 2 | 1 tile | ✅ |
 | Platform 3 → ground | down 3 | 1 tile | ✅ |
 
-This was checked automatically by `tools/build_level.py` (see `data/jump_check_result.json`). The check confirms that all 5 embers and the door can be reached from the start.
+The script `tools/build_level.py` checks this automatically (the result is in `data/jump_check_result.json`). It also checks that the player can reach all 5 embers and the door from the start.

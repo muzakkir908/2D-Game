@@ -13,7 +13,7 @@ There are 4 screens: **Main Menu**, **Gameplay**, **Victory** and **Game Over**.
 | `screen_flow.png` | How the screens connect |
 | `prototype/index.html` | Clickable HTML prototype |
 
-The screens are drawn at 384 × 216 pixels and saved 5 times bigger, so the pixels stay sharp.
+The screens are drawn at 384 × 216 pixels. Then they are saved 5 times bigger, so the pixels stay sharp.
 
 ## Screen 1: Main Menu
 ![](screens/01_main_menu.png)
@@ -57,9 +57,9 @@ In the level you can see the candle hopping towards the first ember, all 5 ember
 | Game Over | RETRY | Gameplay |
 | Game Over | MAIN MENU | Main Menu |
 
-SETTINGS and EXIT are on the menu, but settings are not part of this assignment. They are placeholders: in Figma they do nothing, and in the HTML prototype they show a short message.
+SETTINGS and EXIT are on the menu, but a settings screen is not part of this assignment. They are only placeholders. In Figma they do nothing. In the HTML prototype they show a short message.
 
-**The prototype is clicked, not played.** The arrow keys and the spacebar are the controls of the real game, which is not programmed yet. In Figma's Present mode, the arrow keys and the spacebar do something different: Figma uses them to jump to the next or previous screen. So use the mouse to click the buttons, the door, the moths and the spikes.
+**You click the prototype. You do not play it.** The arrow keys and the spacebar are the controls of the real game, and the real game is not programmed yet. In Figma's Present mode, the arrow keys and the spacebar do something else: Figma uses them to go to the next or previous screen. So use the mouse to click the buttons, the door, the moths and the spikes.
 
 ## HTML prototype
 
@@ -71,6 +71,6 @@ Open `prototype/index.html` in a web browser by double-clicking it.
 
 ## Figma prototype
 
-**Figma link:** make your own new Figma file and put its share link in `05_Documentation/Submission_Document.md`. (An older Figma file from an earlier version of this project exists in a different Figma account. It shows the old game, so do not use it.)
+**Figma link:** make your own new Figma file and put its share link in `05_Documentation/Submission_Document.md`. (There is also an older Figma file from an earlier version of this project, in a different Figma account. It shows the old game, so do not use it.)
 
-How to build it: run the small Figma plugin in `figma_plugin/`. It builds the 4 screens, the buttons, all 11 links and the starting screen in about 3 minutes. Steps: **[`Figma_Rebuild_Guide.md`](Figma_Rebuild_Guide.md)** (the guide also has a manual way).
+How to build it: run the small Figma plugin in `figma_plugin/`. It makes the 4 screens, the buttons, all 11 links and the starting screen. It takes about 3 minutes. The steps are in **[`Figma_Rebuild_Guide.md`](Figma_Rebuild_Guide.md)**. The guide also shows how to do it by hand.

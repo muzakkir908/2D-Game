@@ -29,7 +29,7 @@ You are a little candle lost in a dark cave. Collect five glowing embers, jump o
 | [`02_Pixel_Art_Assets/`](02_Pixel_Art_Assets) | Sprites, tiles, background, sprite sheets, Piskel files, palette and UI pieces |
 | [`03_Level_Design/`](03_Level_Design) | The level map, the annotated map and the level data |
 | [`04_UI_and_Prototype/`](04_UI_and_Prototype) | The 4 screens, the screen flow and the HTML prototype |
-| [`05_Documentation/`](05_Documentation) | Submission document, verification report, checklist and guides |
+| [`05_Documentation/`](05_Documentation) | Submission document, checklist and guides |
 | [`tools/`](tools) | The Python scripts that make and check all the files |
 
 **Start here:** [`05_Documentation/Submission_Document.md`](05_Documentation/Submission_Document.md)

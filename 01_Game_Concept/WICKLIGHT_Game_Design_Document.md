@@ -11,7 +11,7 @@
 | **Players** | 1 |
 | **Length** | One level, 60 seconds |
 
-## 1. Elevator pitch
+## 1. Short pitch (elevator pitch)
 
 You are a little candle lost in a dark cave. Collect five glowing embers, jump over spikes, avoid the moths and reach the exit door before your 60 seconds run out.
 
@@ -43,7 +43,7 @@ Collect all **5 embers**, then walk into the **exit door** before the timer reac
 
 ## 7. Core mechanic
 
-**Run, jump and collect.** The candle runs left and right and jumps between platforms. Every ember is placed next to a danger (spikes or a moth). Getting an ember is a small risk, but you need all five to win. This is the "No Risk? No Reward!" idea.
+**Run, jump and collect.** The candle runs left and right and jumps between platforms. Every ember is next to a danger (spikes or a moth). So each ember is a small risk, but you need all five to win. This is the "No Risk? No Reward!" idea.
 
 ## 8. Controls
 
@@ -53,14 +53,14 @@ Collect all **5 embers**, then walk into the **exit door** before the timer reac
 | Right arrow | Move right |
 | Spacebar | Jump |
 
-The candle can jump **3 tiles high** and across a gap of up to **4 tiles**.
+The candle can jump **3 tiles high**. It can also jump across a gap of up to **4 tiles**.
 
 ## 9. Rules
 
 1. You start with **3 lives** and **60 seconds**.
 2. The timer goes down all the time.
 3. Touch an **ember** to collect it. The ember counter goes up by 1.
-4. If you touch **spikes** or a **moth**, you lose 1 life and go back to the start point. The embers you already have stay collected.
+4. If you touch **spikes** or a **moth**, you lose 1 life and go back to the start point. You keep the embers you already have.
 5. The **exit door** stays closed until you have all 5 embers. Then it opens.
 6. Walk into the open door to finish the level.
 

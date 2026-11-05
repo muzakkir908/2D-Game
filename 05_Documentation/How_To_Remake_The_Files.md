@@ -1,6 +1,6 @@
 # How to Remake the Files
 
-All the pictures and data files are made by small Python programs in `tools/`. If you change a sprite or the level, run one command and every file is made again.
+Small Python programs in `tools/` make all the pictures and data files. If you change a sprite or the level, run one command and all the files are made again.
 
 ## What you need
 
@@ -28,7 +28,7 @@ node tools/test_figma_plugin.js
 
 The JavaScript tests need Node.js. `test_prototype.js` also needs Playwright with Chromium.
 
-`tools/test_piskel.js` also needs a copy of the Piskel editor running on your computer (Piskel is open source: github.com/piskelapp/piskel). Its address goes in `PISKEL_URL`.
+`tools/test_piskel.js` also needs a copy of the Piskel editor running on your computer (Piskel is free and open source: github.com/piskelapp/piskel). Put the web address of your Piskel copy in `PISKEL_URL`.
 
 ## The tool files
 
@@ -67,4 +67,4 @@ Sprites are written as text in `tools/art.py`. One letter is one pixel and `.` i
 
 ## Example: change the level
 
-The level is written as text in `tools/level.py` (`#` ground, `=` platform, `^` spikes, `e` ember, `M` moth, `P` start, `D` door). After a change, run the build again. It checks that every ember and the door can still be reached.
+The level is written as text in `tools/level.py` (`#` ground, `=` platform, `^` spikes, `e` ember, `M` moth, `P` start, `D` door). After a change, run the build again. It checks that the player can still reach every ember and the door.

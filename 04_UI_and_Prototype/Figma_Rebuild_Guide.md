@@ -1,12 +1,12 @@
 # Figma Rebuild Guide
 
-An old Figma file (made earlier by the AI assistant) is in a different Figma account, and it shows the old game. **Do not use it.** Make a new, empty Design file in your own Figma account and use the plugin below. (If you prefer to do it by hand, the manual way is further down.)
+There is an old Figma file (made earlier by the AI assistant) in a different Figma account. It shows the old game. **Do not use it.** Make a new, empty Design file in your own Figma account and use the plugin below. (If you want to do it by hand, the manual way is further down.)
 
 ## ⭐ Quick way: run the WICKLIGHT plugin (about 3 minutes)
 
-The folder `04_UI_and_Prototype/figma_plugin/` has a small Figma plugin. It builds everything for you: the 4 frames with the screen PNGs, all the buttons, the click areas, the 11 links and the starting screen. It does **not** delete anything by itself. It renames the old pages to "OLD VERSION" so you keep a backup.
+The folder `04_UI_and_Prototype/figma_plugin/` has a small Figma plugin. It makes everything for you: the 4 frames with the screen PNGs, all the buttons, the click areas, the 11 links and the starting screen. It does **not** delete anything by itself. If the file already has pages, it renames them to "OLD VERSION", so you still have a backup.
 
-You need the **Figma desktop app**, because Figma only allows your own plugins in the desktop app. Download it from figma.com/downloads.
+You need the **Figma desktop app**. Your own plugins only work in the desktop app, not in the browser. Download it from figma.com/downloads.
 
 1. Download the project from GitHub (green **Code** button → **Download ZIP**) and unzip it.
 2. Open the Figma desktop app. On the home screen, click **Design** (top right) to make a new empty Design file. Click the file name at the top and rename it **WICKLIGHT - The Little Candle**.
@@ -37,6 +37,8 @@ If the plugin shows an error, use the manual way below.
 
 ## Step 1: Clear the old design
 
+If your Figma file is new and empty, skip this step.
+
 1. Open the Figma file.
 2. On every page, select everything (**Ctrl + A**, or **Cmd + A** on Mac) and press **Delete**.
 3. To delete an extra page, right-click it in the left panel and choose **Delete page**. Keep only one page, and rename it **Prototype**.
@@ -59,7 +61,7 @@ To rename a frame, double-click its name in the left panel.
 
 For each frame:
 1. Drag the matching PNG file from your computer into the frame.
-2. With the picture selected, set **X 0, Y 0, W 1920, H 1080** in the right panel. These numbers are inside the frame.
+2. With the picture selected, set **X 0, Y 0, W 1920, H 1080** in the right panel. These numbers start from the top-left corner of the frame.
 3. Rename the picture layer **Screen art**.
 4. Lock it (click the lock icon next to the layer name), so you don't move it by mistake.
 
@@ -67,9 +69,9 @@ Do not stretch the pictures. They are already the right size, so they stay sharp
 
 ## Step 4: Draw the click areas
 
-Press **R** (Rectangle tool) and draw a rectangle inside the frame. Then type the exact numbers below. They are inside the frame, from its top-left corner.
+Press **R** (Rectangle tool) and draw a rectangle inside the frame. Then type the exact numbers below. They start from the top-left corner of the frame.
 
-To make each rectangle invisible but still clickable: in **Fill**, set the opacity to **0%**. Give each rectangle the name in the table.
+Each rectangle should be invisible but still clickable. To do this, set the **Fill** opacity to **0%**. Give each rectangle the name in the table.
 
 | Frame | Rectangle name | X | Y | W | H | Goes to |
 |---|---|---:|---:|---:|---:|---|
@@ -132,9 +134,9 @@ Press **Present (▶)** at the top right. Then click through this list and tick 
 - [ ] (Retry) → Spikes 3 → Game Over
 - [ ] (Retry) → Exit door → Victory → MAIN MENU → Main Menu
 
-Use the mouse, not the keyboard: in Present mode, Figma uses the arrow keys and spacebar to jump to the next screen. SETTINGS and EXIT are placeholders and do nothing.
+Use the mouse, not the keyboard. In Present mode, Figma uses the arrow keys and spacebar to go to the next screen. SETTINGS and EXIT are placeholders and do nothing.
 
-Tip: in Present mode, clicking anywhere that is not clickable makes the click areas flash blue. This helps you check they are in the right place.
+Tip: in Present mode, click on any empty part of the screen. The click areas flash blue, so you can check that they are in the right place.
 
 ## Step 8: Share the file
 
@@ -146,4 +148,4 @@ Tip: in Present mode, clicking anywhere that is not clickable makes the click ar
 
 ## Optional: make the text editable
 
-The screens are pictures. To show editable text in Figma, you can add text layers on top. For example, add a text layer "0/5" over the ember counter. This is optional and not needed for the links to work.
+The screens are pictures, so you cannot change the text on them in Figma. If you want text you can change, add text layers on top. For example, add a text layer "0/5" over the ember counter. This is optional. The links work without it.

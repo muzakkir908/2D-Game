@@ -2,9 +2,9 @@
 
 ![Asset overview](preview/asset_overview_x4.png)
 
-All the art is simple pixel art on a **16 × 16 pixel grid**. Every PNG has a **transparent background**, except the cave background picture. The art uses **16 colours**.
+All the art is simple pixel art on a **16 × 16 pixel grid**. Every PNG has a **see-through (transparent) background**, except the cave background picture. The art uses **16 colours**.
 
-The pictures in `preview/` and files with `_x3` or `_x4` in the name are only enlarged copies for showing the art. Use the normal size files in Piskel or a game engine.
+The pictures in `preview/` and files with `_x3` or `_x4` in the name are only bigger copies for showing the art. Use the normal size files in Piskel or a game engine.
 
 How to open the files in Piskel: see [`05_Documentation/Import_Guide_Piskel_and_Engines.md`](../05_Documentation/Import_Guide_Piskel_and_Engines.md).
 
@@ -77,4 +77,4 @@ Each animation is also saved as a `.piskel` file. You can open these straight in
 ## Preview pictures (`preview/`)
 
 - `asset_overview_x4.png`: all assets on one sheet
-- `candle_sheet_x8.png`: every candle frame, enlarged with a pixel grid
+- `candle_sheet_x8.png`: every candle frame, made bigger, with a pixel grid
