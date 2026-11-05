@@ -1,32 +1,20 @@
 GIMP Palette
 Name: WICKLIGHT
-Columns: 7
+Columns: 4
 #
- 13  11  26	Soot Outline
- 26  26  46	Abyss Navy
- 38  50  74	Stone Dark
- 59  77 107	Stone Mid
- 90 115 148	Stone Light
-138 162 191	Stone Highlight
- 20  57  74	Deep Water
- 31 111 120	Water
- 79 179 169	Water Light
-168 230 207	Foam
- 62 107  58	Moss Dark
-110 162  75	Moss Light
- 74  44  42	Wood Dark
-122  74  53	Wood Mid
-168 113  74	Wood Light
-184  59  59	Flame Red
-240 123  63	Flame Orange
-255 184  77	Flame Amber
-255 224 138	Flame Yellow
-255 246 214	White Hot
-239 227 200	Wax
-201 180 143	Wax Shadow
-191 233 255	Frost Light
-127 184 224	Frost Mid
-107  90 158	Moth Violet
- 61  50  99	Moth Dusk
-140 106  47	Bronze Dark
-201 151  58	Bronze
+ 27  20  35	Outline
+ 36  30  51	Cave Dark
+ 51  41  74	Cave Rock
+ 63  74  94	Stone Dark
+ 94 107 128	Stone
+139 152 168	Stone Light
+243 230 200	Candle
+205 179 140	Candle Shadow
+194  64  58	Flame Red
+240 138  60	Flame Orange
+255 211  92	Flame Yellow
+255 247 217	Flame White
+122  95 168	Moth Purple
+201 182 240	Moth Wing
+107  68  48	Wood
+160 106  63	Wood Light

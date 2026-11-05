@@ -1,0 +1,2 @@
+Each letter is in an 8 x 10 box, 16 boxes per row, in this order:
+ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:.,!?-+/'x%()<>&=| 

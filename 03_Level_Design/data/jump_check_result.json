@@ -1,0 +1,154 @@
+{
+ "embers in level": 5,
+ "spike groups": 3,
+ "moths": 2,
+ "all embers reachable": true,
+ "door reachable": true,
+ "embers standing on solid ground": true,
+ "route jumps ok": true,
+ "route jumps": [
+  {
+   "from": [
+    2,
+    9
+   ],
+   "to": [
+    4,
+    9
+   ],
+   "up": 0,
+   "gap": 1,
+   "ok": true
+  },
+  {
+   "from": [
+    4,
+    9
+   ],
+   "to": [
+    5,
+    9
+   ],
+   "up": 0,
+   "gap": 0,
+   "ok": true
+  },
+  {
+   "from": [
+    5,
+    9
+   ],
+   "to": [
+    8,
+    9
+   ],
+   "up": 0,
+   "gap": 2,
+   "ok": true
+  },
+  {
+   "from": [
+    8,
+    9
+   ],
+   "to": [
+    9,
+    6
+   ],
+   "up": 3,
+   "gap": 0,
+   "ok": true
+  },
+  {
+   "from": [
+    9,
+    6
+   ],
+   "to": [
+    11,
+    6
+   ],
+   "up": 0,
+   "gap": 1,
+   "ok": true
+  },
+  {
+   "from": [
+    11,
+    6
+   ],
+   "to": [
+    13,
+    4
+   ],
+   "up": 2,
+   "gap": 1,
+   "ok": true
+  },
+  {
+   "from": [
+    13,
+    4
+   ],
+   "to": [
+    15,
+    4
+   ],
+   "up": 0,
+   "gap": 1,
+   "ok": true
+  },
+  {
+   "from": [
+    15,
+    4
+   ],
+   "to": [
+    17,
+    6
+   ],
+   "up": -2,
+   "gap": 1,
+   "ok": true
+  },
+  {
+   "from": [
+    17,
+    6
+   ],
+   "to": [
+    19,
+    6
+   ],
+   "up": 0,
+   "gap": 1,
+   "ok": true
+  },
+  {
+   "from": [
+    19,
+    6
+   ],
+   "to": [
+    21,
+    9
+   ],
+   "up": -3,
+   "gap": 1,
+   "ok": true
+  },
+  {
+   "from": [
+    21,
+    9
+   ],
+   "to": [
+    22,
+    9
+   ],
+   "up": 0,
+   "gap": 0,
+   "ok": true
+  }
+ ]
+}

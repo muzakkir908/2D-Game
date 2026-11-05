@@ -1,26 +1,19 @@
 # Note About AI Use
 
-> **Please read and edit this note before you submit.** Your school may have rules about using AI tools, and it may ask you to explain how you used them. This note only lists facts about how the project files were made. Change it so it matches your own work and your school's rules.
+> **Please read and edit this note before you submit.** Your college may have rules about using AI tools. This note lists facts about how the project files were made. Change it so it matches your own work and your college's rules.
 
-## How the files in this project were made
+## How the files were made
 
-This project was made with the help of an AI assistant (Claude, made by Anthropic), working from a detailed brief written by the student.
+This project was made with the help of an AI assistant (Claude, made by Anthropic). The student wrote the briefs (what the game should be and what to change). The AI assistant then:
+- wrote the game concept and all the other documents,
+- wrote the Python programs in `tools/`, which draw all the pixel art, the level map and the screens,
+- designed the level,
+- made the HTML prototype.
 
-The AI assistant:
-- wrote the game concept, rules and the other documents,
-- wrote the Python programs in `tools/`, which draw all the pixel art, maps and screens,
-- designed the level and wrote the level notes,
-- made the HTML prototype,
-- built the Figma prototype through Figma's plugin API.
+The pixel art was not drawn by hand in Piskel. It was written as text maps in code (see `How_To_Remake_The_Files.md`) and saved as PNG and `.piskel` files.
 
-The pixel art was not drawn by hand in a drawing program. It was written as text maps and code (see `How_To_Remake_The_Files.md`), and then turned into PNG files.
-
-## What was checked
-
-- The HTML prototype was opened in a browser by an automated test. Every button link was clicked and checked, and no errors were found.
-- The Figma prototype links were read back from the Figma file and all of them point to the right screens. They were **not** clicked through by hand in Figma's Present mode.
-- All the files were made again from the `tools/` scripts at the end, to make sure they match the scripts.
+An earlier, more complicated version of the game was also built in Figma by the AI assistant. That Figma file has **not** been updated to this simple version yet (see `Verification_Report.md`).
 
 ## Space for your own notes
 
-*(Add here what you did yourself, for example: your ideas, the choices you made, the changes you asked for, and what you checked or changed by hand.)*
+*(Write here what you did yourself. For example: your ideas, the changes you asked for, and the work you do in Figma and Piskel.)*

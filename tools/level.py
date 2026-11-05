@@ -1,98 +1,41 @@
-"""Level 1, "The Drowned Belfry": the level layout and the code that draws it.
+"""WICKLIGHT - The Little Candle: the level.
 
-Legend
-  #  stone (auto top/fill)     =  wooden plank (one-way)   %  crumbling stone
-  ^  iron spikes (hazard)      ~  water surface (hazard)   w  deep water
-  c  hanging chain (decor)     P  player start             e  ember
-  d  wax drop                  b  bell shard               M  frost moth
-  I  icicle (ceiling hazard)   S  sconce checkpoint        G  great bell (2x2, top-left)
+The level is 24 x 12 tiles (384 x 192 pixels). It fits on one screen.
+One letter = one tile:
+  #  stone (ground)     =  stone platform     ^  spikes
+  P  start              e  ember              M  moth (start spot)
+  D  exit door (2 tiles tall, this is the top half)
+  .  empty
 """
-from PIL import Image, ImageDraw
-import random
-import wl
-from build_assets import TILE_INDEX
+from PIL import Image
+import art
 
-# Each section is 24 columns x 14 rows. Jump budget: 3 tiles up, 4 tiles across.
-S1_WICK_ROOM = [
+ROWS = [
     "########################",
-    "########################",
-    "#                       ",
-    "#                       ",
-    "#     c                 ",
-    "#     c                 ",
-    "#     c            e    ",
-    "#     c          e   e  ",
-    "#      e        =====   ",
-    "#     e e    e          ",
-    "#  P e                S ",
-    "######  #####   ########",
-    "######~~#####~~~########",
-    "######ww#####www########",
-]
-S2_MOTH_GALLERY = [
-    "########################",
-    "########################",
-    "                        ",
-    "              M         ",
-    "          e e e     b   ",
-    "        =========  ===  ",
-    "                        ",
-    "    e                   ",
-    "   ===                  ",
-    "                        ",
-    "  d    e  ^^^   e   e   ",
-    "########################",
+    "#......................#",
+    "#......................#",
+    "#......................#",
+    "#.............e.M......#",
+    "#............===.......#",
+    "#.........e.......e....#",
+    "#........===.....===...#",
+    "#.....................D#",
+    "#.P.e.^^....^^^.^...Me.#",
     "########################",
     "########################",
 ]
-S3_FLOODED_NAVE = [
-    "########################",
-    "########################",
-    "        I   I   I       ",
-    "                        ",
-    "                        ",
-    "                   M    ",
-    "            b e         ",
-    "                        ",
-    "          e     e       ",
-    "           %%  %%       ",
-    "  S     d             e ",
-    "####~~~##~~~~~~~~~~~####",
-    "####www##wwwwwwwwwww####",
-    "####www##wwwwwwwwwww####",
-]
-S4_BELL_CLIMB = [
-    "########################",
-    "########################",
-    "               I       #",
-    "           eM   b      #",
-    "          e    e    G  #",
-    "         ###  ===      #",
-    "                   #####",
-    "      de         M  ####",
-    "     ###            ####",
-    "                    ####",
-    " S e     ^^^^^^^^^^^####",
-    "########################",
-    "########################",
-    "########################",
-]
-SECTIONS = [
-    ("THE WICK-ROOM", "TEACH", S1_WICK_ROOM),
-    ("MOTH GALLERY", "CHOOSE", S2_MOTH_GALLERY),
-    ("FLOODED NAVE", "PRESSURE", S3_FLOODED_NAVE),
-    ("BELL CLIMB", "FINAL TEST", S4_BELL_CLIMB),
-]
-for _, _, sec in SECTIONS:
-    assert len(sec) == 14 and all(len(r) == 24 for r in sec), [len(r) for r in sec]
+W, H = 24, 12
+assert len(ROWS) == H and all(len(r) == W for r in ROWS), [len(r) for r in ROWS]
 
-ROWS = ["".join(sec[y] for _, _, sec in SECTIONS) for y in range(14)]
-W, H = len(ROWS[0]), len(ROWS)
-ENTITY = set("PedbMISG")
+# Each moth flies left and right between two columns (on one row).
+MOTH_PATHS = [  # (row, left column, right column)
+    (4, 12, 16),
+    (9, 17, 20),
+]
 
-# background decoration (columns that get windows / pillars)
-WINDOWS = [10, 30, 41, 54, 66, 79]
-PILLARS = [17, 47, 71]
+# Player movement (used to check every jump in the level).
+JUMP_UP_TILES = 3       # highest jump: 3 tiles
+JUMP_ACROSS_TILES = 4   # widest gap: 4 tiles
 
 
 def cell(x, y):
@@ -101,95 +44,41 @@ def cell(x, y):
     return '#'
 
 
-def terrain_tile(x, y):
+def tile_name(x, y):
     c = cell(x, y)
     if c == '#':
-        return 'stone_top' if cell(x, y - 1) not in '#' else 'stone'
-    return {'=': 'plank', '%': 'crumble', '^': 'spikes', '~': 'water_surface_0',
-            'w': 'water_fill', 'c': 'chain'}.get(c)
+        return 'ground_top' if cell(x, y - 1) != '#' else 'ground'
+    return {'=': 'platform', '^': 'spikes'}.get(c)
 
 
-def bg_tile(x, y):
-    if y < 2:
-        return None
-    if x in WINDOWS and y in (3, 4):
-        return 'window_top' if y == 3 else 'window_bottom'
-    if x in PILLARS and 2 <= y <= 10:
-        return 'pillar'
-    return 'stone_bg'
+def find(ch):
+    return [(x, y) for y in range(H) for x in range(W) if ROWS[y][x] == ch]
 
 
-def entities():
-    out = []
-    for y, row in enumerate(ROWS):
-        for x, ch in enumerate(row):
-            if ch in ENTITY:
-                out.append((ch, x, y))
-    return out
-
-
-def count(ch):
-    return sum(r.count(ch) for r in ROWS)
-
-
-def render(x0=0, x1=W, frame=0, lit_sconces=(), player=None, show_start=True,
-           moth_offsets=None, bg_shade=True):
-    """Draw the level from column x0 up to (not including) column x1, at 1x size."""
-    tiles = {n: t for n, t, _ in __import__('build_assets').TILESET}
-    tiles['water_surface_0'] = wl.tile_water(frame % 2)
-    im = Image.new("RGBA", ((x1 - x0) * 16, H * 16), wl.rgba('N'))
-    # far background: dark arches silhouette
-    d = ImageDraw.Draw(im)
-    for x in range(x0, x1):
-        for y in range(H):
-            t = bg_tile(x, y)
+def render(ember_taken=(), moths=None, player=None, door_open=False, show_start=False):
+    """Draw the level (384 x 192). moths = list of (pixel x, pixel y, frame)."""
+    tiles = {n: art.from_map(m, 16, 16) for n, m, _ in art.TILES}
+    img = art.background().crop((0, 24, 384, 216))
+    for y in range(H):
+        for x in range(W):
+            t = tile_name(x, y)
             if t:
-                im.alpha_composite(tiles[t], ((x - x0) * 16, y * 16))
-    if bg_shade:  # push the background back: darken with navy veil
-        veil = Image.new("RGBA", im.size, wl.rgba('N', 120))
-        im.alpha_composite(veil)
-    # moonlight shafts from windows
-    shaft = Image.new("RGBA", im.size, (0, 0, 0, 0))
-    sd = ImageDraw.Draw(shaft)
-    for wx in WINDOWS:
-        if x0 - 6 <= wx < x1:
-            bx = (wx - x0) * 16 + 3
-            sd.polygon([(bx, 64), (bx + 10, 64), (bx + 58, 176), (bx + 34, 176)],
-                       fill=wl.rgba('F', 22))
-    im.alpha_composite(shaft)
-    for x in range(x0, x1):
-        for y in range(H):
-            t = terrain_tile(x, y)
-            if t:
-                im.alpha_composite(tiles[t], ((x - x0) * 16, y * 16))
-    ember = wl.ember_frames()
-    wax = wl.wax_frames()
-    shard = wl.shard_frames()
-    moth = wl.moth_frames()
-    ice = wl.icicle_frames()
-    sconce = wl.sconce_frames()
-    for i, (ch, x, y) in enumerate(entities()):
-        if not (x0 - 2 <= x < x1):
-            continue
-        px, py = (x - x0) * 16, y * 16
-        if ch == 'e':
-            im.alpha_composite(ember[(frame + x) % 4], (px, py))
-        elif ch == 'd':
-            im.alpha_composite(wax[(frame + x) % 2], (px, py))
-        elif ch == 'b':
-            im.alpha_composite(shard[(frame + x) % 4], (px, py))
-        elif ch == 'M':
-            ox, oy = (moth_offsets or {}).get((x, y), (0, 0))
-            im.alpha_composite(moth[(frame + x) % 2], (px + ox, py + oy))
-        elif ch == 'I':
-            im.alpha_composite(ice[(frame + x) % 2], (px, py))
-        elif ch == 'S':
-            im.alpha_composite(sconce[1 + frame % 2] if x in lit_sconces else sconce[0], (px, py))
-        elif ch == 'G':
-            im.alpha_composite(wl.bell(False), (px, py))
-        elif ch == 'P' and show_start and player is None:
-            im.alpha_composite(wl.pip_anim('idle')[0], (px, py))
+                img.alpha_composite(tiles[t], (x * 16, y * 16))
+    ember = art.from_map(art.EMBER_A, 16, 16)
+    for (x, y) in find('e'):
+        if (x, y) not in ember_taken:
+            img.alpha_composite(ember, (x * 16, y * 16))
+    dx, dy = find('D')[0]
+    img.alpha_composite(art.from_map(art.door_rows(door_open)), (dx * 16, dy * 16))
+    moth_imgs = [art.from_map(art.MOTH_UP, 16, 16), art.from_map(art.MOTH_DOWN, 16, 16)]
+    if moths is None:
+        moths = [(x * 16, y * 16, 0) for (x, y) in find('M')]
+    for (mx, my, f) in moths:
+        img.alpha_composite(moth_imgs[f], (mx, my))
+    if show_start:
+        sx, sy = find('P')[0]
+        img.alpha_composite(art.candle_frames()["candle_idle"][0], (sx * 16, sy * 16))
     if player:
-        sprite, ppx, ppy = player
-        im.alpha_composite(sprite, (ppx - x0 * 16, ppy))
-    return im
+        sprite, px, py = player
+        img.alpha_composite(sprite, (px, py))
+    return img

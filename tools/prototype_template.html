@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wicklight Prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* Simple layout: the game screen in a dark frame, screen buttons and a help box below.
+     One dark look on purpose: it uses the game's own colours. */
+  :root {
+    --outline: #1b1423;
+    --cave: #241e33;
+    --rock: #33294a;
+    --stone: #8b98a8;
+    --cream: #f3e6c8;
+    --flame: #ffd35c;
+    --orange: #f08a3c;
+    --font: "Trebuchet MS", Verdana, system-ui, sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--cave); color: var(--cream); }
+  body {
+    margin: 0; font-family: var(--font); font-size: 17px; line-height: 1.5;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 20px 40px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; display: grid; gap: 16px; }
+  h1 { margin: 0; font-size: clamp(22px, 4vw, 32px); color: var(--flame); letter-spacing: 0.04em; }
+  h1 span { color: var(--cream); font-size: 0.55em; margin-left: 8px; letter-spacing: 0.08em; }
+  .frame { border: 4px solid var(--outline); outline: 2px solid var(--stone); outline-offset: -6px; background: var(--outline); padding: 8px; }
+  .stage { position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; overflow: hidden; }
+  .stage img.screen { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; user-select: none; }
+  .hot { position: absolute; padding: 0; border: 2px dashed transparent; background: transparent; cursor: pointer; }
+  .hot img { width: 100%; height: 100%; image-rendering: pixelated; opacity: 0; display: block; }
+  .hot:hover img, .hot:focus-visible img { opacity: 1; }
+  .hot.area:hover, .hot.area:focus-visible { border-color: var(--flame); background: #ffd35c22; }
+  .hot:focus-visible { outline: 3px solid var(--flame); outline-offset: 2px; }
+  .stage.show .hot { border-color: var(--flame); background: #ffd35c33; }
+  .msg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: 80%;
+         background: var(--rock); border: 3px solid var(--outline); padding: 16px 22px; text-align: center; }
+  .msg button { margin-top: 10px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .chip { font: inherit; font-size: 15px; color: var(--cream); background: var(--rock); border: 2px solid var(--outline);
+          padding: 6px 12px; cursor: pointer; }
+  .chip[aria-current="true"] { background: var(--orange); color: var(--outline); }
+  .chip:focus-visible { outline: 3px solid var(--flame); outline-offset: 2px; }
+  .row .space { flex: 1 1 auto; }
+  label { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; font-size: 15px; }
+  .help { background: var(--rock); border-left: 4px solid var(--flame); padding: 12px 16px; }
+  .help p { margin: 0; }
+  kbd { background: var(--outline); padding: 1px 6px; border: 1px solid var(--stone); font-size: 14px; }
+  @media (max-width: 560px) { .row .space { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>WICKLIGHT <span>THE LITTLE CANDLE · CLICKABLE PROTOTYPE</span></h1>
+  <div class="frame"><div class="stage" id="stage">
+    <img class="screen" id="screen" alt="">
+    <div id="hots"></div>
+  </div></div>
+  <nav class="row" aria-label="Go to a screen">
+    <button class="chip" data-go="menu">Main menu</button>
+    <button class="chip" data-go="game">Gameplay</button>
+    <button class="chip" data-go="win">Victory</button>
+    <button class="chip" data-go="lose">Game over</button>
+    <span class="space"></span>
+    <label for="show"><input type="checkbox" id="show"> Show click areas</label>
+  </nav>
+  <section class="help" aria-live="polite">
+    <p><strong>On this screen:</strong> <span id="hint"></span></p>
+    <p><strong>Keys:</strong> <kbd>Enter</kbd> main button, <kbd>Esc</kbd> main menu.</p>
+  </section>
+</div>
+<script>
+(function () {
+  var W = 384, H = 216;
+  var SCREENS = /*SCREENS_JSON*/;
+  var stage = document.getElementById("stage"), screen = document.getElementById("screen");
+  var hots = document.getElementById("hots"), hint = document.getElementById("hint");
+  var current = null, frame = 0, msgBox = null;
+  Object.keys(SCREENS).forEach(function (k) {
+    for (var i = 0; i < 2; i++) { new Image().src = "img/" + SCREENS[k].img + "_f" + i + ".png"; }
+  });
+  function pct(v, t) { return (v / t * 100) + "%"; }
+  function closeMsg() { if (msgBox) { msgBox.remove(); msgBox = null; } }
+  function showMsg(text) {
+    closeMsg();
+    msgBox = document.createElement("div"); msgBox.className = "msg";
+    var p = document.createElement("p"); p.textContent = text; msgBox.appendChild(p);
+    var ok = document.createElement("button"); ok.className = "chip"; ok.textContent = "OK";
+    ok.addEventListener("click", function (e) { e.stopPropagation(); closeMsg(); });
+    msgBox.appendChild(ok); stage.appendChild(msgBox); ok.focus();
+  }
+  function act(h) { if (h.msg) { showMsg(h.msg); } else { go(h.go); } }
+  function render(key) {
+    var s = SCREENS[key]; current = key; closeMsg();
+    screen.src = "img/" + s.img + "_f" + frame + ".png"; screen.alt = s.hint;
+    hots.innerHTML = "";
+    s.hots.forEach(function (h) {
+      var b = document.createElement("button");
+      b.className = "hot" + (h.btn ? "" : " area");
+      b.style.left = pct(h.r[0], W); b.style.top = pct(h.r[1], H);
+      b.style.width = pct(h.r[2], W); b.style.height = pct(h.r[3] + (h.btn ? 2 : 0), H);
+      b.setAttribute("aria-label", h.label);
+      if (h.btn) { var i = document.createElement("img"); i.src = "img/button_" + h.btn + ".png"; i.alt = ""; b.appendChild(i); }
+      b.addEventListener("click", function (e) { e.stopPropagation(); act(h); });
+      hots.appendChild(b);
+    });
+    hint.textContent = s.hint;
+    document.querySelectorAll(".chip[data-go]").forEach(function (c) {
+      c.setAttribute("aria-current", c.dataset.go === key ? "true" : "false");
+    });
+    try { history.replaceState(null, "", "#" + key); } catch (e) {}
+  }
+  function go(key) { if (SCREENS[key]) { render(key); } }
+  stage.addEventListener("click", function () {
+    stage.classList.add("show");
+    setTimeout(function () { if (!document.getElementById("show").checked) stage.classList.remove("show"); }, 600);
+  });
+  document.getElementById("show").addEventListener("change", function (e) { stage.classList.toggle("show", e.target.checked); });
+  document.querySelectorAll(".chip[data-go]").forEach(function (c) { c.addEventListener("click", function () { go(c.dataset.go); }); });
+  document.addEventListener("keydown", function (e) {
+    if (e.target && e.target.tagName === "INPUT") return;
+    if (e.key === "Enter" && !msgBox) {
+      var m = SCREENS[current].hots.filter(function (h) { return h.main; })[0];
+      if (m) { e.preventDefault(); act(m); }
+    } else if (e.key === "Escape") { go("menu"); }
+  });
+  var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!still) setInterval(function () {
+    frame = 1 - frame;
+    if (current) screen.src = "img/" + SCREENS[current].img + "_f" + frame + ".png";
+  }, 400);
+  var start = (location.hash || "").replace("#", "");
+  render(SCREENS[start] ? start : "menu");
+})();
+</script>
+</body>
+</html>
