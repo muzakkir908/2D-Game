@@ -1,0 +1,2 @@
+Cell size 8x10, 16 per row, glyph at +1,+1. Order:
+ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:.,!?-+/'x%()<>& 

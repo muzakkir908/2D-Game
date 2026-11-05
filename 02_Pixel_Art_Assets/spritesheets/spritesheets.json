@@ -1,0 +1,183 @@
+{
+  "tile_size": 16,
+  "sheets": {
+    "pip_idle": {
+      "file": "pip_idle_strip2.png",
+      "frame_w": 16,
+      "frame_h": 16,
+      "frames": 2,
+      "fps": 3,
+      "loop": true
+    },
+    "pip_run": {
+      "file": "pip_run_strip4.png",
+      "frame_w": 16,
+      "frame_h": 16,
+      "frames": 4,
+      "fps": 10,
+      "loop": true
+    },
+    "pip_jump": {
+      "file": "pip_jump_strip1.png",
+      "frame_w": 16,
+      "frame_h": 16,
+      "frames": 1,
+      "fps": 1,
+      "loop": true
+    },
+    "pip_fall": {
+      "file": "pip_fall_strip1.png",
+      "frame_w": 16,
+      "frame_h": 16,
+      "frames": 1,
+      "fps": 1,
+      "loop": true
+    },
+    "pip_hurt": {
+      "file": "pip_hurt_strip1.png",
+      "frame_w": 16,
+      "frame_h": 16,
+      "frames": 1,
+      "fps": 1,
+      "loop": false
+    },
+    "ember": {
+      "file": "ember_strip4.png",
+      "frame_w": 16,
+      "frame_h": 16,
+      "frames": 4,
+      "fps": 8,
+      "loop": true
+    },
+    "wax_drop": {
+      "file": "wax_drop_strip2.png",
+      "frame_w": 16,
+      "frame_h": 16,
+      "frames": 2,
+      "fps": 3,
+      "loop": true
+    },
+    "bell_shard": {
+      "file": "bell_shard_strip4.png",
+      "frame_w": 16,
+      "frame_h": 16,
+      "frames": 4,
+      "fps": 6,
+      "loop": true
+    },
+    "frost_moth": {
+      "file": "frost_moth_strip2.png",
+      "frame_w": 16,
+      "frame_h": 16,
+      "frames": 2,
+      "fps": 8,
+      "loop": true
+    },
+    "icicle": {
+      "file": "icicle_strip2.png",
+      "frame_w": 16,
+      "frame_h": 16,
+      "frames": 2,
+      "fps": 2,
+      "loop": true
+    },
+    "sconce_unlit": {
+      "file": "sconce_unlit_strip1.png",
+      "frame_w": 16,
+      "frame_h": 16,
+      "frames": 1,
+      "fps": 1,
+      "loop": true
+    },
+    "sconce_lit": {
+      "file": "sconce_lit_strip2.png",
+      "frame_w": 16,
+      "frame_h": 16,
+      "frames": 2,
+      "fps": 6,
+      "loop": true
+    },
+    "great_bell_idle": {
+      "file": "great_bell_idle_strip1.png",
+      "frame_w": 32,
+      "frame_h": 32,
+      "frames": 1,
+      "fps": 1,
+      "loop": true
+    },
+    "great_bell_ringing": {
+      "file": "great_bell_ringing_strip2.png",
+      "frame_w": 32,
+      "frame_h": 32,
+      "frames": 2,
+      "fps": 8,
+      "loop": true
+    }
+  },
+  "master_sheet": {
+    "file": "wicklight_master_spritesheet.png",
+    "cell": 16,
+    "rows": {
+      "pip_idle": {
+        "row": 0,
+        "frames": 2,
+        "y": 0
+      },
+      "pip_run": {
+        "row": 1,
+        "frames": 4,
+        "y": 16
+      },
+      "pip_jump": {
+        "row": 2,
+        "frames": 1,
+        "y": 32
+      },
+      "pip_fall": {
+        "row": 3,
+        "frames": 1,
+        "y": 48
+      },
+      "pip_hurt": {
+        "row": 4,
+        "frames": 1,
+        "y": 64
+      },
+      "ember": {
+        "row": 5,
+        "frames": 4,
+        "y": 80
+      },
+      "wax_drop": {
+        "row": 6,
+        "frames": 2,
+        "y": 96
+      },
+      "bell_shard": {
+        "row": 7,
+        "frames": 4,
+        "y": 112
+      },
+      "frost_moth": {
+        "row": 8,
+        "frames": 2,
+        "y": 128
+      },
+      "icicle": {
+        "row": 9,
+        "frames": 2,
+        "y": 144
+      },
+      "sconce_unlit": {
+        "row": 10,
+        "frames": 1,
+        "y": 160
+      },
+      "sconce_lit": {
+        "row": 11,
+        "frames": 2,
+        "y": 176
+      }
+    }
+  }
+}

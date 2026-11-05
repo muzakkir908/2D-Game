@@ -1,0 +1,32 @@
+GIMP Palette
+Name: WICKLIGHT
+Columns: 7
+#
+ 13  11  26	Soot Outline
+ 26  26  46	Abyss Navy
+ 38  50  74	Stone Dark
+ 59  77 107	Stone Mid
+ 90 115 148	Stone Light
+138 162 191	Stone Highlight
+ 20  57  74	Deep Water
+ 31 111 120	Water
+ 79 179 169	Water Light
+168 230 207	Foam
+ 62 107  58	Moss Dark
+110 162  75	Moss Light
+ 74  44  42	Wood Dark
+122  74  53	Wood Mid
+168 113  74	Wood Light
+184  59  59	Flame Red
+240 123  63	Flame Orange
+255 184  77	Flame Amber
+255 224 138	Flame Yellow
+255 246 214	White Hot
+239 227 200	Wax
+201 180 143	Wax Shadow
+191 233 255	Frost Light
+127 184 224	Frost Mid
+107  90 158	Moth Violet
+ 61  50  99	Moth Dusk
+140 106  47	Bronze Dark
+201 151  58	Bronze

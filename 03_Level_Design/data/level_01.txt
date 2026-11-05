@@ -1,0 +1,20 @@
+  #  stone (auto top/fill)     =  wooden plank (one-way)   %  crumbling stone
+  ^  iron spikes (hazard)      ~  water surface (hazard)   w  deep water
+  c  hanging chain (decor)     P  player start             e  ember
+  d  wax drop                  b  bell shard               M  frost moth
+  I  icicle (ceiling hazard)   S  sconce checkpoint        G  great bell (2x2, top-left)
+
+################################################################################################
+################################################################################################
+#                                                       I   I   I                      I       #
+#                                     M                                            eM   b      #
+#     c                           e e e     b                                     e    e    G  #
+#     c                         =========  ===                     M             ###  ===      #
+#     c            e                                        b e                            #####
+#     c          e   e      e                                                 de         M  ####
+#      e        =====      ===                            e     e            ###            ####
+#     e e    e                                             %%  %%                           ####
+#  P e                S   d    e  ^^^   e   e     S     d             e  S e     ^^^^^^^^^^^####
+######  #####   ####################################~~~##~~~~~~~~~~~############################
+######~~#####~~~####################################www##wwwwwwwwwww############################
+######ww#####www####################################www##wwwwwwwwwww############################

@@ -1,0 +1,16 @@
+"""Regenerate every WICKLIGHT asset, map and screen.  Usage:  python3 tools/build_all.py"""
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(__file__))
+import build_assets  # noqa: E402
+import build_level  # noqa: E402
+import build_screens  # noqa: E402
+
+if __name__ == "__main__":
+    build_assets.main()
+    print("assets  -> 02_Pixel_Art_Assets/")
+    build_level.main()
+    print("level   -> 03_Level_Design/")
+    build_screens.main()
+    print("screens -> 04_UI_and_Prototype/")

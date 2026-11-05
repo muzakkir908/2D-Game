@@ -1,0 +1,87 @@
+{
+  "image": "wicklight_tileset.png",
+  "tile_size": 16,
+  "columns": 8,
+  "tiles": [
+    {
+      "index": 0,
+      "name": "stone_top",
+      "type": "solid"
+    },
+    {
+      "index": 1,
+      "name": "stone",
+      "type": "solid"
+    },
+    {
+      "index": 2,
+      "name": "stone_bg",
+      "type": "background"
+    },
+    {
+      "index": 3,
+      "name": "plank",
+      "type": "one_way"
+    },
+    {
+      "index": 4,
+      "name": "crumble",
+      "type": "crumble"
+    },
+    {
+      "index": 5,
+      "name": "crumble_breaking",
+      "type": "crumble"
+    },
+    {
+      "index": 6,
+      "name": "spikes",
+      "type": "hazard"
+    },
+    {
+      "index": 7,
+      "name": "pillar",
+      "type": "background"
+    },
+    {
+      "index": 8,
+      "name": "water_surface_0",
+      "type": "hazard_water"
+    },
+    {
+      "index": 9,
+      "name": "water_surface_1",
+      "type": "hazard_water"
+    },
+    {
+      "index": 10,
+      "name": "water_fill",
+      "type": "hazard_water"
+    },
+    {
+      "index": 11,
+      "name": "chain",
+      "type": "decor"
+    },
+    {
+      "index": 12,
+      "name": "window_top",
+      "type": "background"
+    },
+    {
+      "index": 13,
+      "name": "window_bottom",
+      "type": "background"
+    },
+    {
+      "index": 14,
+      "name": "icicle_mount",
+      "type": "hazard_spawn"
+    },
+    {
+      "index": 15,
+      "name": "sconce_unlit",
+      "type": "checkpoint"
+    }
+  ]
+}
