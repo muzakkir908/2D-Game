@@ -57,7 +57,9 @@ In the level you can see the candle hopping towards the first ember, all 5 ember
 | Game Over | RETRY | Gameplay |
 | Game Over | MAIN MENU | Main Menu |
 
-SETTINGS and EXIT are on the menu, but settings are not part of this assignment. In the HTML prototype they show a short message.
+SETTINGS and EXIT are on the menu, but settings are not part of this assignment. They are placeholders: in Figma they do nothing, and in the HTML prototype they show a short message.
+
+**The prototype is clicked, not played.** The arrow keys and the spacebar are the controls of the real game, which is not programmed yet. In Figma's Present mode, the arrow keys and the spacebar do something different: Figma uses them to jump to the next or previous screen. So use the mouse to click the buttons, the door, the moths and the spikes.
 
 ## HTML prototype
 

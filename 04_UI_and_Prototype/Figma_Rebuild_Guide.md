@@ -132,6 +132,8 @@ Press **Present (▶)** at the top right. Then click through this list and tick 
 - [ ] (Retry) → Spikes 3 → Game Over
 - [ ] (Retry) → Exit door → Victory → MAIN MENU → Main Menu
 
+Use the mouse, not the keyboard: in Present mode, Figma uses the arrow keys and spacebar to jump to the next screen. SETTINGS and EXIT are placeholders and do nothing.
+
 Tip: in Present mode, clicking anywhere that is not clickable makes the click areas flash blue. This helps you check they are in the right place.
 
 ## Step 8: Share the file

@@ -21,6 +21,8 @@ WICKLIGHT – The Little Candle is a small 2D pixel-art platform game. The playe
 | **Figma project and prototype** | ______________________ *(paste the share link of your NEW Figma file, made with the [Figma Rebuild Guide](../04_UI_and_Prototype/Figma_Rebuild_Guide.md))* |
 | **GitHub repository** | ______________________ *(currently https://github.com/muzakkir908/2D-Game/tree/ccr-763ff527-hkh000)* |
 
+**How to view the Figma prototype:** open the Figma link and click **Present (▶)** at the top right. It starts on the Main Menu. Use the **mouse** to click the buttons, the door, the moths and the spikes. (In Figma, the arrow keys and spacebar only jump between screens. They are not the game controls.) SETTINGS and EXIT are placeholders and are not linked.
+
 ## Project files
 
 | Assessed area | Marks | Deliverable | File |
