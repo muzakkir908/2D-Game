@@ -75,19 +75,32 @@ Volume bars, toggles (fullscreen, pixel-perfect, an accessibility "slow wax" ass
 * **Components:** stone 9-slice panel (4 px bevel, bronze rivets) for neutral UI, frost panel for failure, 17 px buttons (selected = flame gradient with dark text, idle = stone with light text).
 * **Grid:** 4 px margins on the 384 × 216 canvas (20 px at 1080p). HUD panels sit in the four corners so the centre of the playfield stays clear.
 
-## 4. Figma version
+## 4. Figma prototype (built)
 
-**Status:** the screens are built as polished PNGs and a working HTML prototype. These steps rebuild the same prototype in Figma in about 10 minutes:
+**Figma file:** https://www.figma.com/design/E1gSy4J9rj3xGSCBafzJrX
 
-1. Create a new Design file → add 5 frames of **1920 × 1080** named *Main Menu*, *Gameplay*, *Victory*, *Game Over*, *Settings*.
-2. Drag each `screens/*_1920x1080.png` into its frame at (0,0). They're pre-scaled with nearest-neighbour, so they stay crisp. Don't scale them inside Figma.
-3. Draw transparent rectangles (hotspots) at these coordinates (frame space, 1920 × 1080):
+This is a real Figma Design file built for this project, not just instructions. Open it and press **Present (▶)**. The flow starts at *Main Menu*.
 
-| Frame | Hotspot | X | Y | W | H | On click → Navigate to |
+| Page | Contents |
+|---|---|
+| **🔥 Prototype** | 5 frames at 1920 × 1080: *1 · Main Menu*, *2 · Gameplay*, *3 · Victory*, *4 · Game Over*, *5 · Settings*, with every navigation link wired |
+| **Components (pixel art + UI)** | Every tile (stone, mossy top, background brick, window, pillar, plank, crumble, spikes, water) and sprite (Pip ×4 poses, ember, wax drop, bell shard, frost moth, icicle, sconce lit/unlit, Great Bell) rebuilt **pixel-for-pixel as Figma components** from the same pixel maps as `tools/wl.py`, plus a `UI/Button` variant set (Default / Selected, editable **Label** property) and resizable `UI/Panel Stone` / `UI/Panel Frost` components |
+| **Art Assets** | HUD icons (hearts, clock, ember, shard, glow flames, bell) |
+| Local variables | **Wicklight Palette**: all 28 colours as colour variables |
+
+Everything is editable. Each scene is a **tilemap of component instances** in layers (*background → veil → terrain → entities → lighting → FX → HUD*), so editing a tile component updates every screen. All text is live Silkscreen text.
+
+**Interactions:** PLAY → Gameplay · SETTINGS → Settings → BACK → Menu · on Gameplay, click the **moth** or **spikes** → Game Over, and click the **shard route on the right** → Victory · REPLAY/RETRY → Gameplay · MAIN MENU → Menu. Keyboard: Enter, Esc, and W/L on gameplay, the same as the HTML prototype. Transitions use Dissolve, 150 ms.
+
+### Rebuilding it by hand (alternative)
+If you'd rather assemble your own Figma file from the PNGs:
+1. Make 5 frames of **1920 × 1080** and drop each `screens/*_1920x1080.png` in at (0,0). They're pre-scaled with nearest-neighbour, so they stay crisp. `figma_assets/bg_*.png` are the same scenes **without UI** if you want to rebuild the UI as layers.
+2. Add transparent hotspot rectangles at these frame coordinates and set **On click → Navigate to**, Dissolve 150 ms:
+
+| Frame | Hotspot | X | Y | W | H | Navigate to |
 |---|---|---:|---:|---:|---:|---|
 | Main Menu | PLAY | 700 | 420 | 520 | 95 | Gameplay |
 | Main Menu | SETTINGS | 700 | 540 | 520 | 95 | Settings |
-| Main Menu | EXIT | 700 | 660 | 520 | 95 | (overlay "Thanks for playing") |
 | Settings | BACK | 760 | 840 | 400 | 95 | Main Menu |
 | Gameplay | Frost moth | 1020 | 180 | 200 | 150 | Game Over |
 | Gameplay | Spikes | 790 | 740 | 260 | 80 | Game Over |
@@ -97,6 +110,4 @@ Volume bars, toggles (fullscreen, pixel-perfect, an accessibility "slow wax" ass
 | Game Over | RETRY | 430 | 860 | 500 | 95 | Gameplay |
 | Game Over | MAIN MENU | 990 | 860 | 500 | 95 | Main Menu |
 
-4. *Prototype* tab → for each hotspot: **On click → Navigate to → (target)**, animation **Dissolve, 150 ms, ease out**.
-5. Set *Main Menu* as the **flow starting point**, then press ▶ Present.
-6. Optional: add the hover buttons from `prototype/img/btn_*_hover.png` (scale ×5) as a **While hovering** variant.
+3. Set *Main Menu* as the flow starting point and press ▶.

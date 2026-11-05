@@ -18,7 +18,7 @@ Assignment theme: **No Risk? No Reward!**
 | **A. Game concept and rules** | [`01_Game_Concept/`](01_Game_Concept) | [`WICKLIGHT_Game_Design_Document.md`](01_Game_Concept/WICKLIGHT_Game_Design_Document.md) |
 | **B. Pixel art asset pack** | [`02_Pixel_Art_Assets/`](02_Pixel_Art_Assets) | [`README.md`](02_Pixel_Art_Assets/README.md) (style guide + Piskel/Unity/Godot import) |
 | **C. Level design** | [`03_Level_Design/`](03_Level_Design) | [`LEVEL_DESIGN.md`](03_Level_Design/LEVEL_DESIGN.md) + [`level_01_annotated_design_x2.png`](03_Level_Design/level_01_annotated_design_x2.png) |
-| **D. Game UI and prototype** | [`04_UI_and_Prototype/`](04_UI_and_Prototype) | Open [`prototype/index.html`](04_UI_and_Prototype/prototype/index.html) in a browser · [`UI_AND_PROTOTYPE.md`](04_UI_and_Prototype/UI_AND_PROTOTYPE.md) |
+| **D. Game UI and prototype** | [`04_UI_and_Prototype/`](04_UI_and_Prototype) | **Figma prototype:** https://www.figma.com/design/E1gSy4J9rj3xGSCBafzJrX · HTML prototype: open [`prototype/index.html`](04_UI_and_Prototype/prototype/index.html) · [`UI_AND_PROTOTYPE.md`](04_UI_and_Prototype/UI_AND_PROTOTYPE.md) |
 | Source / generators | [`tools/`](tools) | `python3 tools/build_all.py` regenerates every image |
 
 ## At a glance
@@ -52,6 +52,7 @@ Assignment theme: **No Risk? No Reward!**
 04_UI_and_Prototype/
   screens/             1920x1080 screens, native 384x216 versions, animated GIFs
   prototype/           index.html interactive prototype (open in browser)
+  figma_assets/        Scene art without UI (x5) for rebuilding UI as layers
   screen_flow_diagram.png
 tools/                 Python (Pillow + NumPy) generators for every asset
 ```
