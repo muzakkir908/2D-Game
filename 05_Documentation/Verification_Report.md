@@ -58,7 +58,6 @@ This report lists every requirement, how it was checked and what is still left t
 | Simple English, same words everywhere, no old game words | all `.md` files | Read through; automatic check for 15 words from the old version | Complete and verified | – |
 | All links and images work | all `.md` files | Automatic check of every link and image | Complete and verified | – |
 | **H. Submission document** | `05_Documentation/Submission_Document.md` | Read through; all links checked | Requires my attention | Fill in your name, student number, course and date |
-| AI use note | `05_Documentation/AI_Use_Note.md` | Read through | Requires my attention | Edit it to match your college's rules |
 
 ## 2. Tests performed
 
@@ -81,5 +80,4 @@ This report lists every requirement, how it was checked and what is still left t
 3. Set Figma sharing so your teacher can open the file.
 4. Open one `.piskel` file and one PNG strip in Piskel to check them.
 5. Fill in your details in `Submission_Document.md`.
-6. Edit `AI_Use_Note.md`.
-7. Make sure your teacher can open the repository link.
+6. Make sure your teacher can open the repository link.

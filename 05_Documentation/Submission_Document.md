@@ -49,4 +49,3 @@ WICKLIGHT – The Little Candle is a small 2D pixel-art platform game. The playe
 - [ ] Set Figma sharing to **"Anyone with the link can view"**.
 - [ ] Make sure your teacher can open the repository link (if the repository is private, add your teacher or share a ZIP file).
 - [ ] Open at least one `.piskel` file in Piskel to check it.
-- [ ] Read and edit [`AI_Use_Note.md`](AI_Use_Note.md).
