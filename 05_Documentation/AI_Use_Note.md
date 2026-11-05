@@ -8,7 +8,9 @@ I used an AI assistant to help me with this project. I wrote the instructions: w
 - wrote the game concept document and the other documents,
 - wrote the Python programs in `tools/`, which draw the pixel art, the level map and the screens,
 - designed the level from my rules (one small level, 5 embers, spikes, moths and one door),
-- made the HTML prototype and the test scripts.
+- made the HTML prototype and the test scripts,
+- made the small Figma plugin that builds the Figma prototype,
+- tested the `.piskel` files in the Piskel editor (see `piskel_test_evidence/`).
 
 The pixel art was not drawn by hand in Piskel. It was written as text maps in code (see `How_To_Remake_The_Files.md`), then saved as PNG and `.piskel` files.
 
@@ -17,8 +19,7 @@ The pixel art was not drawn by hand in Piskel. It was written as text maps in co
 *(Write what you did yourself. For example:)*
 - *I chose the game idea and asked for the simpler version.*
 - *I checked the screens, the level and the documents.*
-- *I rebuilt the Figma prototype and tested it in Present mode.*
-- *I opened the `.piskel` files in Piskel and checked them.*
+- *I ran the Figma plugin and tested the prototype in Present mode.*
 
 ## AI tool used
 

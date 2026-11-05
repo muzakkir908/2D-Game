@@ -1,0 +1,25 @@
+{
+  "name": "WICKLIGHT Prototype Builder",
+  "id": "wicklight-prototype-builder",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": [
+    "figma"
+  ],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": [
+      "none"
+    ]
+  },
+  "menu": [
+    {
+      "name": "Build WICKLIGHT prototype",
+      "command": "build"
+    },
+    {
+      "name": "Delete OLD VERSION pages",
+      "command": "delete-old"
+    }
+  ]
+}

@@ -9,7 +9,7 @@ This report shows what was checked, how it was checked, and what is still left t
 - **Requires my attention:** the student must do something.
 
 **Two kinds of checks are used:**
-- **Automatic checks:** the scripts `tools/check_project.py` (37 checks) and `tools/test_prototype.js` (27 checks).
+- **Automatic checks:** `tools/check_project.py`, `tools/test_prototype.js`, `tools/test_figma_plugin.js` and `tools/test_piskel.js`.
 - **Checked by eye:** the pictures were opened and looked at, at full size.
 
 ## 1. Final assignment checklist
@@ -23,7 +23,7 @@ This report shows what was checked, how it was checked, and what is still left t
 | Hazards and enemies | Complete and verified | `sprites/moth/` (2 frames), `tiles/3_spikes.png`. Checked by eye. | – |
 | Sprite sheet | Complete and verified | `spritesheets/wicklight_spritesheet.png` and 6 strips. Automatic: every row matches its strip, and every strip matches the single PNGs pixel for pixel. | – |
 | PNG exports | Complete and verified | Automatic: all sprite PNGs are RGBA with see-through backgrounds, no half-transparent pixels, only the 16 palette colours, sizes are multiples of 16. Palette: `palette/wicklight.gpl`. | – |
-| Piskel compatibility | Complete but not tested | `piskel/*.piskel` (6 files). Automatic: the files follow the rules in Piskel's own loading code (model version 2, frame size from the layout), and their pixels match the PNGs. **Not opened in Piskel:** the Piskel website is blocked in my work environment. | Open `candle_walk.piskel` in Piskel (see the checklist in `Import_Guide_Piskel_and_Engines.md`) |
+| Piskel compatibility | Complete and verified | All 6 `.piskel` files were opened in the **real Piskel editor** (Piskel's open-source code, run in a browser on my work computer, because the piskelapp.com website is blocked there). Opened through Piskel's own Import panel; size, frame count, frame order, speed, palette colours and transparency checked; one pixel drawn with the Pen tool and undone; a PNG exported from Piskel and compared pixel by pixel with the original strip: **49 of 49 checks passed**. Evidence: `05_Documentation/piskel_test_evidence/`. | – (optional: open one file on piskelapp.com yourself) |
 | Complete level map | Complete and verified | `03_Level_Design/level_map_x3.png`, `level_map_grid.png`, `data/level.txt`, `data/level.tmj`. One screen, 24 × 12 tiles. Checked by eye. | – |
 | Annotated player route | Complete and verified | `level_map_annotated_x3.png`: route, 8 numbered notes, legend, moth paths. Checked by eye at full size. | – |
 | Challenge design | Complete and verified | `LEVEL_DESIGN.md`. Automatic jump check: every route jump is at most 3 tiles up and 4 tiles across, and all 5 embers and the door can be reached (`data/jump_check_result.json`). Clear beginning, middle and end. | – |
@@ -31,7 +31,7 @@ This report shows what was checked, how it was checked, and what is still left t
 | Gameplay screen | Complete and verified | `screens/02_gameplay.png`: candle, cave, 3 platforms, all 5 embers, 2 moths, 3 spike groups, door, 3 hearts, timer 0:58, ember counter 0/5, goal text. Checked by eye; numbers checked automatically. | – |
 | Victory screen | Complete and verified | `screens/03_victory.png`: message, 5/5 embers, time left, lives left, "LEVEL COMPLETE", REPLAY, MAIN MENU. Checked by eye. | – |
 | Game-over screen | Complete and verified | `screens/04_game_over.png`: message, 3/5 embers, reason, time left, RETRY, MAIN MENU. Checked by eye. | – |
-| Interactive Figma prototype | **Incomplete** | The Figma file still shows the **old** game. It could not be updated: the Figma editing tool is still at the Starter plan's monthly limit (checked again in this session). The HTML prototype has the same links and passed 27 of 27 automatic checks. | Rebuild it with `04_UI_and_Prototype/Figma_Rebuild_Guide.md`, test it in Present mode and set sharing |
+| Interactive Figma prototype | Requires my attention | The Figma file still shows the old game: the Figma editing tool is still at the Starter plan's limit (checked again). Instead, I made a **Figma plugin** (`04_UI_and_Prototype/figma_plugin/`) that builds the 4 frames, 7 buttons, click areas, 11 links and the starting screen in one click. Its logic passed 36 of 36 checks in a test outside Figma (`tools/test_figma_plugin.js`). It has **not** been run inside Figma yet. The HTML prototype has the same links and passed 27 of 27 checks. | Run the plugin in the Figma desktop app (3 minutes), test in Present mode, set sharing |
 | Submission document | Requires my attention | `05_Documentation/Submission_Document.md`: description, links and all project files. All links work (automatic). | Fill in your name, student number, course, assignment title, date, Figma link and GitHub link |
 | Repository organisation | Complete and verified | Folders 01–05 plus `tools/`. Automatic: all document links and images work, no old-version words in documents or code, no duplicate sprites. Rebuilding twice gives the same files. | Check that your teacher can open the GitHub link |
 
@@ -47,10 +47,13 @@ This report shows what was checked, how it was checked, and what is still left t
 | Figma guide matches the prototype | Part of the project checks | All 11 click areas match exactly |
 | Checked by eye | The 4 screens, the asset overview, the annotated level map | No overlaps, readable text, the same style everywhere |
 | Figma editing | One read-only call | **Failed:** plan limit reached. No edits were made. |
+| Figma plugin (logic) | `node tools/test_figma_plugin.js`: runs the plugin code with a pretend Figma | **36 of 36 passed**: 4 frames at 1920 × 1080, exact screen PNGs, 7 buttons, 11 correct links, Main Menu as start, old pages kept as backup |
+| Figma plugin (in Figma) | – | **Not done:** Figma editing is blocked for me |
+| Figma Present mode | – | **Not done** (Figma not available to me) |
 | Piskel website | Tried to connect | **Failed:** blocked by the network rules of my work environment |
-| Figma Present mode | – | **Not done** (Figma not available) |
+| Piskel editor (real app) | `tools/test_piskel.js`: Piskel's own source code, run in Chromium | **49 of 49 passed** for all 6 files: open, check, edit with the Pen tool, undo, export PNG, compare. Screenshots checked by eye. |
 
-**What the automatic checks do not prove:** there is no game code yet, so nothing was actually played. The checks cannot open Figma or Piskel.
+**What the automatic checks do not prove:** there is no game code yet, so nothing was actually played. The Figma plugin was tested outside Figma only. Piskel was tested with the real Piskel editor code, but on my work computer, not on piskelapp.com.
 
 ## 3. Fixes made in this session
 
@@ -63,6 +66,8 @@ This report shows what was checked, how it was checked, and what is still left t
 | The submission document had no assignment title field and no blank fields for the links. | Added them. |
 | The Piskel guide had no steps for checking a file. | Added a short checklist. |
 | The checks did not cover the required documents, the Figma guide numbers or old words in the code. | Added 4 new automatic checks (33 → 37). |
+| Figma could not be edited by me. | Made a one-click Figma plugin (`04_UI_and_Prototype/figma_plugin/`) and a test for it. Added a "Quick way" to the Figma guide. |
+| The `.piskel` files had never been opened in Piskel. | Ran the real Piskel editor (its open-source code) in a browser and tested all 6 files. Saved the results, screenshots and exported PNGs in `piskel_test_evidence/`. |
 
 ## 4. The 125 files removed in the redesign
 
@@ -85,11 +90,10 @@ Each group of removed files was checked against the new version. No required wor
 
 ## 5. What you must do before submitting
 
-1. **Rebuild the Figma prototype:** follow `04_UI_and_Prototype/Figma_Rebuild_Guide.md`.
+1. **Build the Figma prototype:** run the plugin in the Figma desktop app (Quick way in `04_UI_and_Prototype/Figma_Rebuild_Guide.md`).
 2. **Test it in Present mode:** tick the list in Step 7 of the guide.
 3. **Share it:** set "Anyone with the link can view" and copy the link.
-4. **Test Piskel:** open `02_Pixel_Art_Assets/piskel/candle_walk.piskel` in Piskel and tick the checklist in `05_Documentation/Import_Guide_Piskel_and_Engines.md`.
-5. **Fill in `Submission_Document.md`:** name, student number, course, assignment title, date, Figma link and GitHub link.
-6. **Fill in `AI_Use_Note.md`:** add your own work, and check the note against your college's rules.
-7. **Check the GitHub link:** make sure your teacher can open it. If the repository is private, add your teacher or upload a ZIP of the project to Moodle.
-8. **Delete the old branch `ccr-d1b522b6-hxi5qm`** on GitHub (Branches page → trash icon). It holds only an old empty commit.
+4. **Fill in `Submission_Document.md`:** name, student number, course, assignment title, date, Figma link and GitHub link.
+5. **Fill in `AI_Use_Note.md`:** add your own work, and check the note against your college's rules.
+6. **Check the GitHub link:** make sure your teacher can open it. If the repository is private, add your teacher or upload a ZIP of the project to Moodle.
+7. **Delete the old branch `ccr-d1b522b6-hxi5qm`** on GitHub (Branches page → trash icon). It holds only an old empty commit.

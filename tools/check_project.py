@@ -247,6 +247,20 @@ REQUIRED_DOCS = ["01_Game_Concept/WICKLIGHT_Game_Design_Document.md", "02_Pixel_
 missing_docs = [d for d in REQUIRED_DOCS if not os.path.exists(os.path.join(ROOT, d))]
 check("All required documents exist (%d)" % len(REQUIRED_DOCS), not missing_docs, missing_docs)
 
+# Figma plugin and Piskel test evidence
+plugin_dir = os.path.join(ROOT, "04_UI_and_Prototype", "figma_plugin")
+manifest_ok = False
+try:
+    mf = json.load(open(os.path.join(plugin_dir, "manifest.json")))
+    manifest_ok = mf.get("main") == "code.js" and os.path.exists(os.path.join(plugin_dir, "code.js"))
+except Exception:  # noqa: BLE001
+    pass
+check("Figma plugin exists (manifest.json + code.js)", manifest_ok)
+ev = os.path.join(ROOT, "05_Documentation", "piskel_test_evidence")
+exported = glob.glob(os.path.join(ev, "*_exported_from_piskel.png"))
+check("Piskel test evidence exists (results + 6 exported PNGs)",
+      os.path.exists(os.path.join(ev, "piskel_test_results.txt")) and len(exported) == 6, len(exported))
+
 # the Figma guide must use the same click areas as the prototype (x5)
 guide = open(os.path.join(ROOT, "04_UI_and_Prototype", "Figma_Rebuild_Guide.md")).read()
 rows = re.findall(r"\| Click: [^|]+\| (\d+) \| (\d+) \| (\d+) \| (\d+) \|", guide)

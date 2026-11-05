@@ -20,9 +20,15 @@ python3 tools/build_all.py
 
 ```bash
 python3 tools/check_project.py
+node tools/test_prototype.js
+node tools/test_figma_plugin.js
 ```
 
-This checks the PNG files, sprite sheets, Piskel files, the level, the screens and the documents, and prints PASS or FAIL for each check.
+`check_project.py` checks the PNG files, sprite sheets, Piskel files, the level, the screens and the documents. Each test prints PASS or FAIL for every check.
+
+The JavaScript tests need Node.js. `test_prototype.js` also needs Playwright with Chromium.
+
+`tools/test_piskel.js` also needs a copy of the Piskel editor running on your computer (Piskel is open source: github.com/piskelapp/piskel). Its address goes in `PISKEL_URL`.
 
 ## The tool files
 
@@ -35,8 +41,12 @@ This checks the PNG files, sprite sheets, Piskel files, the level, the screens a
 | `tools/build_level.py` | Saves the level maps and checks every jump |
 | `tools/build_screens.py` | Saves the 4 screens, the screen flow picture and the HTML prototype |
 | `tools/prototype_template.html` | The page design used for the HTML prototype |
-| `tools/build_all.py` | Runs the three build files |
+| `tools/build_figma_plugin.py` | Makes the Figma plugin in `04_UI_and_Prototype/figma_plugin/` |
+| `tools/build_all.py` | Runs all the build files |
 | `tools/check_project.py` | Checks the whole project |
+| `tools/test_prototype.js` | Clicks through the HTML prototype in a browser |
+| `tools/test_figma_plugin.js` | Tests the Figma plugin's logic (outside Figma) |
+| `tools/test_piskel.js` | Opens, edits and exports every `.piskel` file in the Piskel editor |
 
 ## Example: change a sprite
 

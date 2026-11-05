@@ -73,4 +73,4 @@ Open `prototype/index.html` in a web browser by double-clicking it.
 
 > ⚠️ **This Figma file still shows the OLD, complicated version of the game.** I could not update it, because the Figma editing tool has reached the Starter plan's monthly limit. You need to rebuild it with the 4 new screens before you submit.
 
-Follow the step-by-step guide: **[`Figma_Rebuild_Guide.md`](Figma_Rebuild_Guide.md)** (about 15–20 minutes).
+The quick fix: run the small Figma plugin in `figma_plugin/`. It builds the 4 screens, the buttons, all 11 links and the starting screen in about 3 minutes. Steps: **[`Figma_Rebuild_Guide.md`](Figma_Rebuild_Guide.md)** (the guide also has a manual way).

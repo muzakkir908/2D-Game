@@ -4,7 +4,10 @@ Use the normal size files. The files in `preview/` and files with `_x3` or `_x4`
 
 ## Piskel
 
-### Way 1: open a `.piskel` file (easiest)
+### Way 1: open a `.piskel` file (easiest, tested)
+
+All 6 `.piskel` files were opened in the real Piskel editor, edited and exported again, and every check passed. The results and screenshots are in `05_Documentation/piskel_test_evidence/`.
+
 1. Open Piskel (piskelapp.com).
 2. Click the **folder icon (Open)** on the right.
 3. Click **Browse .piskel files** and choose a file from `02_Pixel_Art_Assets/piskel/`, for example `candle_walk.piskel`.

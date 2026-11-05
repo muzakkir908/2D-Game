@@ -1,6 +1,28 @@
 # Figma Rebuild Guide
 
-The Figma file still shows the old game. This guide rebuilds it with the 4 new screens. It takes about 15–20 minutes.
+The Figma file still shows the old game. There are two ways to fix it.
+
+## ⭐ Quick way: run the WICKLIGHT plugin (about 3 minutes)
+
+The folder `04_UI_and_Prototype/figma_plugin/` has a small Figma plugin. It builds everything for you: the 4 frames with the screen PNGs, all the buttons, the click areas, the 11 links and the starting screen. It does **not** delete your old design. It renames the old pages to "OLD VERSION" so you keep a backup.
+
+You need the **Figma desktop app**, because Figma only allows your own plugins in the desktop app. Download it from figma.com/downloads.
+
+1. Download the project from GitHub (green **Code** button → **Download ZIP**) and unzip it.
+2. Open the Figma desktop app and open your WICKLIGHT file.
+3. In the top menu, choose **Plugins → Development → Import plugin from manifest…**
+4. Choose the file `04_UI_and_Prototype/figma_plugin/manifest.json`.
+5. Choose **Plugins → Development → WICKLIGHT Prototype Builder → Build WICKLIGHT prototype**.
+6. Wait a few seconds. A message at the bottom says **"Done: 4 screens and 11 links."**
+7. Press **Present (▶)** and test every link with the list in Step 7 below.
+8. If everything works, you can remove the old pages with **Plugins → Development → WICKLIGHT Prototype Builder → Delete OLD VERSION pages**.
+9. Share the file (Step 8 below).
+
+If the plugin shows an error, use the manual way below.
+
+---
+
+## Manual way (about 15–20 minutes)
 
 **Figma file:** https://www.figma.com/design/E1gSy4J9rj3xGSCBafzJrX
 
