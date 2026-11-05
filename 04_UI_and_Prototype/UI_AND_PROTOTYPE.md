@@ -26,11 +26,11 @@ The screens are drawn at 384 × 216 pixels and saved 5 times bigger, so the pixe
 ![](screens/02_gameplay.png)
 The whole level fits on the screen. The bar at the top shows:
 - **Lives:** 3 hearts
-- **Embers:** 2/5 (the candle already has embers 1 and 2)
-- **Timer:** 0:41 (the timer started at 1:00)
+- **Embers:** 0/5 (the run has just started)
+- **Timer:** 0:58 (the timer starts at 1:00, which is 60 seconds)
 - **Goal:** "GET 5 EMBERS, THEN GO TO THE DOOR"
 
-In the level you can see the candle on the first platform, the 3 embers still left, 2 moths, 3 spike groups and the exit door.
+In the level you can see the candle hopping towards the first ember, all 5 embers, the 3 platforms, 2 moths, 3 spike groups and the exit door.
 
 ## Screen 3: Victory
 ![](screens/03_victory.png)
@@ -71,33 +71,6 @@ Open `prototype/index.html` in a web browser by double-clicking it.
 
 **Figma file:** https://www.figma.com/design/E1gSy4J9rj3xGSCBafzJrX
 
-> ⚠️ **This Figma file still shows the OLD, complicated version of the game.** It has to be rebuilt with the 4 new screens before you submit. The tool I used to edit Figma reached its usage limit before I could update the file. Follow the steps below. It takes about 15 minutes.
+> ⚠️ **This Figma file still shows the OLD, complicated version of the game.** I could not update it, because the Figma editing tool has reached the Starter plan's monthly limit. You need to rebuild it with the 4 new screens before you submit.
 
-### How to build the Figma prototype
-
-1. Open the Figma file and delete the old frames (or start a new Design file).
-2. Make 4 frames of **1920 × 1080** and name them **Main Menu**, **Gameplay**, **Victory** and **Game Over**.
-3. Drag each screen PNG from `screens/` into its frame and place it at **X 0, Y 0**. Do not resize it.
-4. Draw a rectangle for each click area in the table below. Set its fill opacity to 0%, so it can't be seen.
-5. Click the **Prototype** tab. For each rectangle, add **On click → Navigate to →** the screen in the last column. Use the **Dissolve** animation (150 ms).
-6. Select the Main Menu frame and add a **flow starting point** (the ▶ icon in the Prototype tab).
-7. Press **Present (▶)** and click through every link once.
-8. Click **Share** and set the link to **"Anyone with the link can view"**, or invite your teacher.
-
-### Click areas (in 1920 × 1080 frame coordinates)
-
-| Frame | Click area | X | Y | W | H | Navigate to |
-|---|---|---:|---:|---:|---:|---|
-| Main Menu | PLAY | 710 | 430 | 500 | 95 | Gameplay |
-| Gameplay | Exit door | 1740 | 750 | 120 | 180 | Victory |
-| Gameplay | Moth 1 | 1140 | 420 | 160 | 120 | Game Over |
-| Gameplay | Moth 2 | 1400 | 820 | 160 | 120 | Game Over |
-| Gameplay | Spikes 1 | 480 | 850 | 160 | 70 | Game Over |
-| Gameplay | Spikes 2 | 960 | 850 | 240 | 70 | Game Over |
-| Gameplay | Spikes 3 | 1280 | 850 | 80 | 70 | Game Over |
-| Victory | REPLAY | 510 | 800 | 430 | 95 | Gameplay |
-| Victory | MAIN MENU | 980 | 800 | 430 | 95 | Main Menu |
-| Game Over | RETRY | 510 | 800 | 430 | 95 | Gameplay |
-| Game Over | MAIN MENU | 980 | 800 | 430 | 95 | Main Menu |
-
-These are the same click areas as in the HTML prototype, made 5 times bigger.
+Follow the step-by-step guide: **[`Figma_Rebuild_Guide.md`](Figma_Rebuild_Guide.md)** (about 15–20 minutes).

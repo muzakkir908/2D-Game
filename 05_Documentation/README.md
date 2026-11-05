@@ -7,3 +7,5 @@
 | [`Requirements_Checklist.md`](Requirements_Checklist.md) | Where to find each part of the assignment |
 | [`Import_Guide_Piskel_and_Engines.md`](Import_Guide_Piskel_and_Engines.md) | How to open the art in Piskel |
 | [`How_To_Remake_The_Files.md`](How_To_Remake_The_Files.md) | How the `tools/` scripts make and check all the files |
+| [`AI_Use_Note.md`](AI_Use_Note.md) | How AI was used. **Fill it in and check it against your college's rules.** |
+| [`../04_UI_and_Prototype/Figma_Rebuild_Guide.md`](../04_UI_and_Prototype/Figma_Rebuild_Guide.md) | Step-by-step guide to rebuilding the Figma prototype |

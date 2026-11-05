@@ -1,0 +1,127 @@
+# Figma Rebuild Guide
+
+The Figma file still shows the old game. This guide rebuilds it with the 4 new screens. It takes about 15–20 minutes.
+
+**Figma file:** https://www.figma.com/design/E1gSy4J9rj3xGSCBafzJrX
+
+**You need these 4 files** (from `04_UI_and_Prototype/screens/`):
+
+| Screen | PNG file | Size |
+|---|---|---|
+| Main Menu | `01_main_menu.png` | 1920 × 1080 |
+| Gameplay | `02_gameplay.png` | 1920 × 1080 |
+| Victory | `03_victory.png` | 1920 × 1080 |
+| Game Over | `04_game_over.png` | 1920 × 1080 |
+
+---
+
+## Step 1: Clear the old design
+
+1. Open the Figma file.
+2. On every page, select everything (**Ctrl + A**, or **Cmd + A** on Mac) and press **Delete**.
+3. To delete an extra page, right-click it in the left panel and choose **Delete page**. Keep only one page, and rename it **Prototype**.
+4. If there are old colour variables, open the **Local variables** panel and delete the old collection.
+
+## Step 2: Make 4 frames
+
+Press **F** (Frame tool). Draw a frame, then type the exact numbers in the right panel.
+
+| Frame name | X | Y | W | H |
+|---|---:|---:|---:|---:|
+| Main Menu | 0 | 0 | 1920 | 1080 |
+| Gameplay | 2120 | 0 | 1920 | 1080 |
+| Victory | 0 | 1280 | 1920 | 1080 |
+| Game Over | 2120 | 1280 | 1920 | 1080 |
+
+To rename a frame, double-click its name in the left panel.
+
+## Step 3: Put the screens in the frames
+
+For each frame:
+1. Drag the matching PNG file from your computer into the frame.
+2. With the picture selected, set **X 0, Y 0, W 1920, H 1080** in the right panel. These numbers are inside the frame.
+3. Rename the picture layer **Screen art**.
+4. Lock it (click the lock icon next to the layer name), so you don't move it by mistake.
+
+Do not stretch the pictures. They are already the right size, so they stay sharp.
+
+## Step 4: Draw the click areas
+
+Press **R** (Rectangle tool) and draw a rectangle inside the frame. Then type the exact numbers below. They are inside the frame, from its top-left corner.
+
+To make each rectangle invisible but still clickable: in **Fill**, set the opacity to **0%**. Give each rectangle the name in the table.
+
+| Frame | Rectangle name | X | Y | W | H | Goes to |
+|---|---|---:|---:|---:|---:|---|
+| Main Menu | Click: PLAY | 710 | 430 | 500 | 95 | Gameplay |
+| Gameplay | Click: Exit door | 1740 | 750 | 120 | 180 | Victory |
+| Gameplay | Click: Moth 1 | 1140 | 420 | 160 | 120 | Game Over |
+| Gameplay | Click: Moth 2 | 1400 | 820 | 160 | 120 | Game Over |
+| Gameplay | Click: Spikes 1 | 480 | 850 | 160 | 70 | Game Over |
+| Gameplay | Click: Spikes 2 | 960 | 850 | 240 | 70 | Game Over |
+| Gameplay | Click: Spikes 3 | 1280 | 850 | 80 | 70 | Game Over |
+| Victory | Click: REPLAY | 510 | 800 | 430 | 95 | Gameplay |
+| Victory | Click: MAIN MENU | 980 | 800 | 430 | 95 | Main Menu |
+| Game Over | Click: RETRY | 510 | 800 | 430 | 95 | Gameplay |
+| Game Over | Click: MAIN MENU | 980 | 800 | 430 | 95 | Main Menu |
+
+**Where the buttons are on the pictures** (so you can see that the click areas line up):
+
+| Frame | Button | X | Y | W | H |
+|---|---|---:|---:|---:|---:|
+| Main Menu | PLAY | 710 | 430 | 500 | 85 |
+| Main Menu | SETTINGS | 710 | 550 | 500 | 85 |
+| Main Menu | EXIT | 710 | 670 | 500 | 85 |
+| Victory | REPLAY | 510 | 800 | 430 | 85 |
+| Victory | MAIN MENU | 980 | 800 | 430 | 85 |
+| Game Over | RETRY | 510 | 800 | 430 | 85 |
+| Game Over | MAIN MENU | 980 | 800 | 430 | 85 |
+
+Each click area is 10 pixels taller than its button, so the dark shadow under the button is clickable too.
+
+SETTINGS and EXIT have no link, because there is no settings screen in this assignment.
+
+## Step 5: Add the links
+
+1. Click the **Prototype** tab (top of the right panel).
+2. Select a click rectangle. A small **+** circle appears on its right edge.
+3. Drag the **+** onto the frame in the "Goes to" column.
+4. In the pop-up, check that it says **On click → Navigate to → (frame name)**. Set **Animation** to **Dissolve**, **150 ms**.
+5. Do this for all 11 rectangles.
+
+## Step 6: Set the starting screen
+
+1. Still in the **Prototype** tab, click on an empty part of the canvas.
+2. Under **Flow starting point**, click **+** and choose **Main Menu**.
+3. Name the flow **WICKLIGHT prototype**.
+
+## Step 7: Test it in Present mode
+
+Press **Present (▶)** at the top right. Then click through this list and tick each line:
+
+- [ ] The prototype starts on the **Main Menu**.
+- [ ] PLAY → Gameplay
+- [ ] Exit door → Victory
+- [ ] Victory REPLAY → Gameplay
+- [ ] Moth 1 → Game Over
+- [ ] Game Over RETRY → Gameplay
+- [ ] Moth 2 → Game Over
+- [ ] Game Over MAIN MENU → Main Menu
+- [ ] PLAY → Gameplay → Spikes 1 → Game Over
+- [ ] (Retry) → Spikes 2 → Game Over
+- [ ] (Retry) → Spikes 3 → Game Over
+- [ ] (Retry) → Exit door → Victory → MAIN MENU → Main Menu
+
+Tip: in Present mode, clicking anywhere that is not clickable makes the click areas flash blue. This helps you check they are in the right place.
+
+## Step 8: Share the file
+
+1. Click **Share** (top right).
+2. Under **Who has access**, choose **Anyone with the link**, and set it to **can view**.
+3. Click **Copy link**.
+4. Paste this link into `05_Documentation/Submission_Document.md` and into Moodle.
+5. Open the link in a private browser window (not logged in). If you can see the file, your teacher can too.
+
+## Optional: make the text editable
+
+The screens are pictures. To show editable text in Figma, you can add text layers on top. For example, add a text layer "0/5" over the ember counter. This is optional and not needed for the links to work.

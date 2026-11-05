@@ -1,83 +1,95 @@
 # Verification Report
 
-This report lists every requirement, how it was checked and what is still left to do.
+This report shows what was checked, how it was checked, and what is still left to do.
 
-**Status words used:**
-- **Complete and verified:** the work is done and was checked.
-- **Complete but not tested:** the work is done, but one test could not be done.
+**Status words:**
+- **Complete and verified:** the work is done and it was checked.
+- **Complete but not tested:** the work is done, but one important test could not be done.
 - **Incomplete:** the work is not finished.
-- **Requires my attention:** the student must do something before submitting.
+- **Requires my attention:** the student must do something.
 
-## 1. Requirements table
+**Two kinds of checks are used:**
+- **Automatic checks:** the scripts `tools/check_project.py` (37 checks) and `tools/test_prototype.js` (27 checks).
+- **Checked by eye:** the pictures were opened and looked at, at full size.
 
-| Requirement | File/location | Test performed | Status | Remaining work |
-|---|---|---|---|---|
-| **A. Game concept and rules** | | | | |
-| Title, pitch, genre, audience, story, setting | `01_Game_Concept/WICKLIGHT_Game_Design_Document.md` | Read through every section; checked against the brief | Complete and verified | – |
-| Character, objective, core mechanic, controls | same file | Read through; controls checked against the main menu text | Complete and verified | – |
-| Rules, collectibles, hazards, scoring | same file | Numbers checked against the level and screens (5 embers, 3 lives, 60 s, 2 moths, 3 spike groups) by `check_project.py` | Complete and verified | – |
-| Win and lose conditions, gameplay loop | same file | Checked against the Victory and Game Over screens | Complete and verified | – |
-| **B. Pixel art and Piskel** | | | | |
-| Candle player sprite | `02_Pixel_Art_Assets/sprites/player/` | Automatic checks (transparency, palette colours, stray pixels, frame alignment) and checked by eye at 8× size | Complete and verified | – |
-| Idle animation (2 frames) | `candle_idle_0–1.png`, `candle_idle_strip2.png` | Strip matches the single frames; frames line up | Complete and verified | – |
-| Walk animation (4 frames) | `candle_walk_0–3.png`, `candle_walk_strip4.png` | Strip matches the frames; no duplicate frames | Complete and verified | – |
-| Jump sprite | `candle_jump_0.png` | Automatic checks and checked by eye | Complete and verified | – |
-| Ember collectible | `sprites/ember/` | Automatic checks and checked by eye | Complete and verified | – |
-| Moth enemy | `sprites/moth/` | Automatic checks and checked by eye | Complete and verified | – |
-| Spike hazard | `tiles/3_spikes.png` | Automatic checks and checked by eye | Complete and verified | – |
-| Stone tiles (4 tiles) | `tiles/`, `tiles/tileset.png` | Tile size 16 × 16; tiles join up correctly on the level map | Complete and verified | – |
-| Cave background | `background/cave_background.png` | Size 384 × 216; checked by eye | Complete and verified | – |
-| Exit door | `sprites/door/` | Size 16 × 32; checked by eye | Complete and verified | – |
-| Combined sprite sheet | `spritesheets/wicklight_spritesheet.png` | Each row matches its strip exactly | Complete and verified | – |
-| Palette | `palette/wicklight.gpl` | 16 colours; every pixel in every sprite uses only these colours | Complete and verified | – |
-| Transparent backgrounds | all sprite PNGs | Every sprite is RGBA, has a clear corner pixel and no half-transparent pixels | Complete and verified | – |
-| Files open in Piskel | `piskel/*.piskel`, `spritesheets/*.png` | The `.piskel` files were checked against the rules in Piskel's own loading code. The Piskel website could not be reached from my computer, so the files were **not** opened in Piskel itself. | Complete but not tested | Open one `.piskel` file and one PNG strip in Piskel |
-| **C. Level design** | | | | |
-| Complete level map | `03_Level_Design/level_map_x3.png`, `level_map_grid.png` | Checked by eye; one screen, 24 × 12 tiles | Complete and verified | – |
-| Start, exit, route, platforms, embers, enemies, hazards marked | `level_map_annotated_x3.png` | Checked by eye; legend lists every symbol | Complete and verified | – |
-| Readable notes | `level_map_annotated_x3.png`, `LEVEL_DESIGN.md` | 8 numbered notes checked by eye at full size | Complete and verified | – |
-| Jumps are possible | `data/jump_check_result.json` | Automatic check: every route jump is at most 3 tiles up and 4 tiles across; all 5 embers and the door can be reached | Complete and verified | – |
-| Map matches the rules | level + concept document | 5 embers, 2 moths, 3 spike groups, 1 start and 1 door counted automatically | Complete and verified | – |
-| **D. UI screens and prototype** | | | | |
-| Main Menu (title, background, PLAY, SETTINGS, EXIT) | `04_UI_and_Prototype/screens/01_main_menu.png` | Checked by eye at full size; nothing overlaps | Complete and verified | – |
-| Gameplay (player, level, embers, enemies, hazards, lives, timer, ember counter, goal) | `screens/02_gameplay.png` | Checked by eye; HUD numbers checked automatically (2/5 embers = 2 embers missing from the level) | Complete and verified | – |
-| Victory (message, embers, completion, REPLAY, MAIN MENU) | `screens/03_victory.png` | Checked by eye | Complete and verified | – |
-| Game Over (message, progress, RETRY, MAIN MENU) | `screens/04_game_over.png` | Checked by eye | Complete and verified | – |
-| HTML prototype links | `prototype/index.html` | Automatic browser test: 27 of 27 checks passed (every link, both messages, keys, images, phone width, no errors) | Complete and verified | – |
-| **Figma project with the 4 new screens** | Figma file | Not done: the Figma editing tool reached its plan limit. **The Figma file still shows the old, complicated version.** | Incomplete | Rebuild it with the steps in `04_UI_and_Prototype/UI_AND_PROTOTYPE.md` |
-| Figma prototype links | Figma file | Not done (see above) | Incomplete | Add the 11 click areas from the table in `UI_AND_PROTOTYPE.md` |
-| Figma tested in Present mode | Figma file | Not done | Requires my attention | Click every link in Present mode |
-| Figma sharing | Figma file | Can't be checked with my tools | Requires my attention | Set sharing to "Anyone with the link can view" |
-| **E. Gameplay consistency** | | | | |
-| Controls, 3 lives, 60 s timer, 5 embers, win and lose rules | all documents and screens | `check_project.py` checks the numbers on every screen; documents read through | Complete and verified | – |
-| **F. Repository** | | | | |
-| Folders, file names, no temporary or duplicate files | whole repository | File list checked; no duplicate sprites (automatic); no cache or log files tracked | Complete and verified | – |
-| Files can be made again | `tools/build_all.py` | Ran the build again; all files were made with no errors | Complete and verified | – |
-| Repository link works for the teacher | GitHub link | Can't be checked with my tools | Requires my attention | Check that your teacher can open it |
-| **G. Documentation** | | | | |
-| Simple English, same words everywhere, no old game words | all `.md` files | Read through; automatic check for 15 words from the old version | Complete and verified | – |
-| All links and images work | all `.md` files | Automatic check of every link and image | Complete and verified | – |
-| **H. Submission document** | `05_Documentation/Submission_Document.md` | Read through; all links checked | Requires my attention | Fill in your name, student number, course and date |
+## 1. Final assignment checklist
 
-## 2. Tests performed
+| Assignment requirement | Result | Evidence or file | Remaining work |
+|---|---|---|---|
+| Game concept and rules | Complete and verified | `01_Game_Concept/WICKLIGHT_Game_Design_Document.md`. All 17 sections read through. Its numbers (3 lives, 60 s, 5 embers, 2 moths, 3 spike groups) match the level and screens (automatic check). | – |
+| Original player sprite | Complete and verified | `02_Pixel_Art_Assets/sprites/player/`: idle (2 frames), walk (4), jump (1), all 16 × 16. Automatic: frames line up, no stray pixels, no duplicates. Checked by eye. | – |
+| Environment tiles | Complete and verified | `tiles/`: ground top, ground, platform, spikes, plus `tileset.png` (64 × 16). `background/cave_background.png`. Tiles join correctly on the level map (checked by eye). | – |
+| Collectibles | Complete and verified | `sprites/ember/` (2 frames). Checked by eye. | – |
+| Hazards and enemies | Complete and verified | `sprites/moth/` (2 frames), `tiles/3_spikes.png`. Checked by eye. | – |
+| Sprite sheet | Complete and verified | `spritesheets/wicklight_spritesheet.png` and 6 strips. Automatic: every row matches its strip, and every strip matches the single PNGs pixel for pixel. | – |
+| PNG exports | Complete and verified | Automatic: all sprite PNGs are RGBA with see-through backgrounds, no half-transparent pixels, only the 16 palette colours, sizes are multiples of 16. Palette: `palette/wicklight.gpl`. | – |
+| Piskel compatibility | Complete but not tested | `piskel/*.piskel` (6 files). Automatic: the files follow the rules in Piskel's own loading code (model version 2, frame size from the layout), and their pixels match the PNGs. **Not opened in Piskel:** the Piskel website is blocked in my work environment. | Open `candle_walk.piskel` in Piskel (see the checklist in `Import_Guide_Piskel_and_Engines.md`) |
+| Complete level map | Complete and verified | `03_Level_Design/level_map_x3.png`, `level_map_grid.png`, `data/level.txt`, `data/level.tmj`. One screen, 24 × 12 tiles. Checked by eye. | – |
+| Annotated player route | Complete and verified | `level_map_annotated_x3.png`: route, 8 numbered notes, legend, moth paths. Checked by eye at full size. | – |
+| Challenge design | Complete and verified | `LEVEL_DESIGN.md`. Automatic jump check: every route jump is at most 3 tiles up and 4 tiles across, and all 5 embers and the door can be reached (`data/jump_check_result.json`). Clear beginning, middle and end. | – |
+| Main menu | Complete and verified | `04_UI_and_Prototype/screens/01_main_menu.png` (1920 × 1080): title, background, PLAY, SETTINGS, EXIT. Checked by eye: nothing overlaps. | – |
+| Gameplay screen | Complete and verified | `screens/02_gameplay.png`: candle, cave, 3 platforms, all 5 embers, 2 moths, 3 spike groups, door, 3 hearts, timer 0:58, ember counter 0/5, goal text. Checked by eye; numbers checked automatically. | – |
+| Victory screen | Complete and verified | `screens/03_victory.png`: message, 5/5 embers, time left, lives left, "LEVEL COMPLETE", REPLAY, MAIN MENU. Checked by eye. | – |
+| Game-over screen | Complete and verified | `screens/04_game_over.png`: message, 3/5 embers, reason, time left, RETRY, MAIN MENU. Checked by eye. | – |
+| Interactive Figma prototype | **Incomplete** | The Figma file still shows the **old** game. It could not be updated: the Figma editing tool is still at the Starter plan's monthly limit (checked again in this session). The HTML prototype has the same links and passed 27 of 27 automatic checks. | Rebuild it with `04_UI_and_Prototype/Figma_Rebuild_Guide.md`, test it in Present mode and set sharing |
+| Submission document | Requires my attention | `05_Documentation/Submission_Document.md`: description, links and all project files. All links work (automatic). | Fill in your name, student number, course, assignment title, date, Figma link and GitHub link |
+| Repository organisation | Complete and verified | Folders 01–05 plus `tools/`. Automatic: all document links and images work, no old-version words in documents or code, no duplicate sprites. Rebuilding twice gives the same files. | Check that your teacher can open the GitHub link |
+
+## 2. Tests performed in this session
 
 | Test | How | Result |
 |---|---|---|
-| Project check | `python3 tools/check_project.py` | **33 of 33 checks passed** |
-| HTML prototype test | `node tools/test_prototype.js` (Playwright and Chromium) | **27 of 27 checks passed** |
-| Jump check | `tools/build_level.py` | All jumps OK; all embers and the door can be reached |
-| Rebuild | `python3 tools/build_all.py` | All files made with no errors |
-| Visual check | Looked at every new picture at full size: asset overview, candle sheet, palette card, 3 level maps, 4 screens, screen flow | Problems found and fixed: route line covering embers, overlapping labels, a wrong arrow in the screen flow, cut-off palette names |
-| Piskel format check | Part of `check_project.py`: follows Piskel's loader rules (model version 2, frame size from the layout) | Passed, but **not** tested in Piskel itself |
-| Figma | Not tested | The Figma editing tool reached its limit |
+| Rebuild from source | `python3 tools/build_all.py` | Worked, no errors |
+| Rebuild gives the same files | Ran the build twice and compared | No differences |
+| Project checks | `python3 tools/check_project.py` | **37 of 37 passed** |
+| HTML prototype | `node tools/test_prototype.js` (Chromium browser) | **27 of 27 passed**: starts on the Main Menu, all 11 links, Settings and Exit messages, Enter and Esc keys, all images load, no sideways scroll at phone width, no errors |
+| Level jump check | Part of the build | Passed: 5 embers, 2 moths, 3 spike groups, everything reachable |
+| Figma guide matches the prototype | Part of the project checks | All 11 click areas match exactly |
+| Checked by eye | The 4 screens, the asset overview, the annotated level map | No overlaps, readable text, the same style everywhere |
+| Figma editing | One read-only call | **Failed:** plan limit reached. No edits were made. |
+| Piskel website | Tried to connect | **Failed:** blocked by the network rules of my work environment |
+| Figma Present mode | – | **Not done** (Figma not available) |
 
-**What the automatic checks do not cover:** they don't play a real game (there is no game code yet), and they don't open Piskel or Figma.
+**What the automatic checks do not prove:** there is no game code yet, so nothing was actually played. The checks cannot open Figma or Piskel.
 
-## 3. Things you must do yourself
+## 3. Fixes made in this session
 
-1. Rebuild the Figma prototype with the 4 new screens (about 15 minutes; steps in `04_UI_and_Prototype/UI_AND_PROTOTYPE.md`).
-2. Test every Figma link in Present mode.
-3. Set Figma sharing so your teacher can open the file.
-4. Open one `.piskel` file and one PNG strip in Piskel to check them.
-5. Fill in your details in `Submission_Document.md`.
-6. Make sure your teacher can open the repository link.
+| Problem | Fix |
+|---|---|
+| The Gameplay screen showed only 3 of the 5 embers (2 already collected) and 0:41 on the timer. The Figma brief asks for five embers and a 60-second timer. | The Gameplay screen now shows the start of the run: all 5 embers, 0/5, 0:58 and 3 full hearts. The candle is hopping towards the first ember (this also shows the jump sprite). |
+| The code still called the font "Belfry" (a name from the old version). | Renamed it to "WICKLIGHT pixel font". |
+| There was no full Figma rebuild guide. | Added `04_UI_and_Prototype/Figma_Rebuild_Guide.md` with exact sizes, positions, click areas, links, starting screen, a test list and sharing steps. |
+| The AI use note had been deleted, but it is a required document. | Added it again, without naming a product. It has spaces for you to fill in what your college asks for. |
+| The submission document had no assignment title field and no blank fields for the links. | Added them. |
+| The Piskel guide had no steps for checking a file. | Added a short checklist. |
+| The checks did not cover the required documents, the Figma guide numbers or old words in the code. | Added 4 new automatic checks (33 → 37). |
+
+## 4. The 125 files removed in the redesign
+
+Each group of removed files was checked against the new version. No required work is missing.
+
+| Removed (old version) | Why it was removed | Replaced by (new version) |
+|---|---|---|
+| Old player sprites and strips (9 frames, 5 animations) | Old character | Candle: idle, walk, jump (7 frames, 3 strips) |
+| Old collectibles (ember, wax drop, bell shard) | Wax and shards were removed from the game | Ember (2 frames) |
+| Old hazards (frost moth, icicle) | Icicles were removed from the game | Moth (2 frames) and spikes tile |
+| Old objects (sconce, Great Bell) | Checkpoints and the bell were removed | Exit door (closed and open) |
+| Old 16-tile tileset and tile files | Too many tiles for a beginner project | 4 tiles + `tileset.png` + cave background |
+| Old UI buttons, icons, panels, font sheet | Old style and colours | New buttons, icons, panel, font sheet |
+| Old palette files (28 colours) | Old colours | New 16-colour palette |
+| Old preview sheets | Old art | `asset_overview_x4.png`, `candle_sheet_x8.png` |
+| Old level maps and 4 section close-ups, old level data | 96-tile, 4-section level | One-screen level: 3 maps + 4 data files |
+| Old 5 screens (including Settings) and flow diagram | Old game; only 4 screens needed | 4 new screens + `screen_flow.png` |
+| Old prototype images | Old screens | New prototype images |
+| `tools/wl.py` | Old art library | `tools/art.py` and `tools/font.py` |
+
+## 5. What you must do before submitting
+
+1. **Rebuild the Figma prototype:** follow `04_UI_and_Prototype/Figma_Rebuild_Guide.md`.
+2. **Test it in Present mode:** tick the list in Step 7 of the guide.
+3. **Share it:** set "Anyone with the link can view" and copy the link.
+4. **Test Piskel:** open `02_Pixel_Art_Assets/piskel/candle_walk.piskel` in Piskel and tick the checklist in `05_Documentation/Import_Guide_Piskel_and_Engines.md`.
+5. **Fill in `Submission_Document.md`:** name, student number, course, assignment title, date, Figma link and GitHub link.
+6. **Fill in `AI_Use_Note.md`:** add your own work, and check the note against your college's rules.
+7. **Check the GitHub link:** make sure your teacher can open it. If the repository is private, add your teacher or upload a ZIP of the project to Moodle.
+8. **Delete the old branch `ccr-d1b522b6-hxi5qm`** on GitHub (Branches page → trash icon). It holds only an old empty commit.

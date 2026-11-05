@@ -25,6 +25,19 @@ Click **Import → Browse images** and choose one PNG from `02_Pixel_Art_Assets/
 2. Choose `02_Pixel_Art_Assets/palette/wicklight.gpl`.
 3. Use only these 16 colours when you change the art, so it still matches.
 
+### Edit a sprite
+1. Pick a colour from the palette (after you import `wicklight.gpl`).
+2. Use the **Pen tool (P)** to draw single pixels and the **Eraser (E)** to make pixels see-through.
+3. Click a frame on the left to edit that frame. The preview at the top right plays the animation.
+
+### Check that a file works (do this once before you submit)
+Open `candle_walk.piskel` and check:
+- [ ] There are **4 frames** on the left.
+- [ ] Each frame is **16 × 16** (Piskel shows the size at the bottom right).
+- [ ] The preview plays a walking candle at **8 FPS**.
+- [ ] The background is see-through (a grey and white checker pattern).
+- [ ] You can draw a pixel with the Pen tool and undo it with **Ctrl + Z**.
+
 ### Save your work
 Use **Save** to get a `.piskel` file, or **Export → PNG → Spritesheet** to get a PNG strip.
 

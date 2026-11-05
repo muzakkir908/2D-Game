@@ -1,4 +1,4 @@
-"""WICKLIGHT pixel font ("Belfry 5x7").
+"""WICKLIGHT pixel font (5 x 7 pixel letters).
 
 Each letter is 5 pixels wide (some are thinner) and 7 pixels tall.
 '#' means a filled pixel.

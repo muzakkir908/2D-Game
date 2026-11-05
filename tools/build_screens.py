@@ -20,7 +20,8 @@ END_BUTTONS = [(102, 160, 86), (196, 160, 86)]      # left button, right button
 # The game state shown on the screens (all numbers must match the rules).
 START_LIVES = 3
 START_TIME = 60
-GAMEPLAY = {"lives": 3, "time": 41, "embers": 2}
+GAMEPLAY = {"lives": 3, "time": 58, "embers": 0}
+GAMEPLAY_TAKEN = []          # embers already collected on the gameplay screen (none)
 VICTORY = {"lives": 2, "time": 18, "embers": 5}
 GAME_OVER = {"lives": 0, "time": 26, "embers": 3, "reason": "NO LIVES LEFT"}
 
@@ -83,9 +84,10 @@ def moth_positions(frame):
 
 def screen_gameplay(frame=0):
     img = Image.new("RGBA", (SW, SH), art.rgba('N'))
-    taken = [(4, 9), (10, 6)]          # ember 1 (ground) and ember 2 (first platform)
-    lvl = L.render(ember_taken=taken, moths=moth_positions(frame),
-                   player=(candle(frame), 11 * 16, 6 * 16))
+    # The run has just started: the candle hops towards ember 1. All 5 embers are still there.
+    jump = art.candle_frames()["candle_jump"][0]
+    lvl = L.render(ember_taken=GAMEPLAY_TAKEN, moths=moth_positions(frame),
+                   player=(jump, 44, 126))
     img.alpha_composite(lvl, (0, HUD_H))
     hud(img, **GAMEPLAY)
     return img

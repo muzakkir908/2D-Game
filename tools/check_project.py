@@ -188,12 +188,15 @@ check("Moth paths stay inside the level and do not go through walls",
 bs = build_screens
 check("Timer starts at 60 seconds", bs.START_TIME == 60)
 check("Player has 3 lives", bs.START_LIVES == 3)
-check("Gameplay HUD: embers shown (2) = embers missing from the map (2)",
-      bs.GAMEPLAY["embers"] == 2 and len(L.find('e')) - bs.GAMEPLAY["embers"] == 3)
+check("Gameplay HUD ember count matches the embers missing from the map",
+      bs.GAMEPLAY["embers"] == len(bs.GAMEPLAY_TAKEN))
+check("Gameplay screen shows all 5 embers, 3 full lives and a timer under 60 s",
+      len(L.find('e')) - len(bs.GAMEPLAY_TAKEN) == 5 and bs.GAMEPLAY["lives"] == 3
+      and 0 < bs.GAMEPLAY["time"] <= 60)
 check("Victory shows 5/5 embers and time left > 0", bs.VICTORY["embers"] == 5 and bs.VICTORY["time"] > 0)
 check("Game Over reason matches its numbers (0 lives, under 5 embers)",
       bs.GAME_OVER["lives"] == 0 and bs.GAME_OVER["embers"] < 5 and bs.GAME_OVER["reason"] == "NO LIVES LEFT")
-check("Gameplay time (0:41) is below 60 and above victory time left (0:18)",
+check("Gameplay time is below 60 and above the victory time left",
       bs.VICTORY["time"] < bs.GAMEPLAY["time"] < bs.START_TIME)
 shots = sorted(glob.glob(os.path.join(ROOT, "04_UI_and_Prototype", "screens", "*.png")))
 check("4 screens exist at 1920 x 1080",
@@ -225,7 +228,7 @@ for f in docs + [os.path.join(ROOT, "04_UI_and_Prototype", "prototype", "index.h
     for w in OLD_WORDS:
         if w in text and not f.endswith("Verification_Report.md"):
             old.append(f"{os.path.relpath(f, ROOT)}: '{w}'")
-check("No words from the old, complicated version are left in the documents", not old, old)
+check("No words from the old, complicated version are left in the documents or code", not old, old)
 
 placeholders = []
 for md in docs:
@@ -233,6 +236,40 @@ for md in docs:
         if re.search(r"\bTODO\b|lorem|TBD", line):
             placeholders.append(os.path.relpath(md, ROOT))
 check("No placeholder text in the documents (except name/number fields)", not placeholders, placeholders)
+
+# required documents
+REQUIRED_DOCS = ["01_Game_Concept/WICKLIGHT_Game_Design_Document.md", "02_Pixel_Art_Assets/README.md",
+                 "03_Level_Design/LEVEL_DESIGN.md", "04_UI_and_Prototype/UI_AND_PROTOTYPE.md",
+                 "04_UI_and_Prototype/Figma_Rebuild_Guide.md",
+                 "05_Documentation/Import_Guide_Piskel_and_Engines.md",
+                 "05_Documentation/Requirements_Checklist.md", "05_Documentation/Submission_Document.md",
+                 "05_Documentation/Verification_Report.md", "05_Documentation/AI_Use_Note.md"]
+missing_docs = [d for d in REQUIRED_DOCS if not os.path.exists(os.path.join(ROOT, d))]
+check("All required documents exist (%d)" % len(REQUIRED_DOCS), not missing_docs, missing_docs)
+
+# the Figma guide must use the same click areas as the prototype (x5)
+guide = open(os.path.join(ROOT, "04_UI_and_Prototype", "Figma_Rebuild_Guide.md")).read()
+rows = re.findall(r"\| Click: [^|]+\| (\d+) \| (\d+) \| (\d+) \| (\d+) \|", guide)
+guide_boxes = sorted(tuple(int(v) for v in r) for r in rows)
+code_boxes = []
+for key, scr in bs.hotspots().items():
+    for h in scr["hots"]:
+        if "go" in h:
+            x, y, w, hh = h["r"]
+            code_boxes.append((x * 5, y * 5, w * 5, (hh + (2 if h.get("btn") else 0)) * 5))
+check("Figma guide click areas match the prototype click areas exactly (11)",
+      guide_boxes == sorted(code_boxes) and len(guide_boxes) == 11, (guide_boxes, sorted(code_boxes)))
+
+# old words in the code as well
+code_old = []
+for f in glob.glob(os.path.join(HERE, "*.py")) + [os.path.join(HERE, "prototype_template.html")]:
+    if f.endswith("check_project.py"):
+        continue
+    text = open(f).read().lower()
+    for w in OLD_WORDS + ["belfry"]:
+        if w in text:
+            code_old.append(f"{os.path.basename(f)}: '{w}'")
+check("No words from the old version are left in the code", not code_old, code_old)
 
 # ---------------------------------------------------------------- report
 fails = [r for r in results if not r[0]]
