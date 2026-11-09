@@ -26,6 +26,12 @@ FRAMES = [  # key, frame name, png file, x, y on the Figma canvas
     ("win", "Victory", "03_victory", 0, 1280),
     ("lose", "Game Over", "04_game_over", 2120, 1280),
 ]
+# Level design frames: name, file in 03_Level_Design/, x, y (placed below the 4 screens)
+LEVELS = [
+    ("Level Map - Annotated", "level_map_annotated_x3.png", 0, 2600),
+    ("Level Map", "level_map_x3.png", 1352, 2600),
+    ("Level Map - Grid", "level_map_grid.png", 1352, 3376),
+]
 BUTTON_NAMES = {"play": "PLAY", "settings": "SETTINGS", "exit": "EXIT", "replay": "REPLAY",
                 "retry": "RETRY", "main_menu": "MAIN MENU"}
 
@@ -34,6 +40,17 @@ def b64_png(img):
     buf = io.BytesIO()
     img.save(buf, "PNG", optimize=True)
     return base64.b64encode(buf.getvalue()).decode()
+
+
+def level_data():
+    out = []
+    for name, png, x, y in LEVELS:
+        path = os.path.join(ROOT, "03_Level_Design", png)
+        w, h = Image.open(path).size
+        with open(path, "rb") as f:
+            out.append({"name": name, "x": x, "y": y, "w": w, "h": h,
+                        "png": base64.b64encode(f.read()).decode()})
+    return out
 
 
 def plugin_data():
@@ -62,6 +79,7 @@ def plugin_data():
 CODE = r"""// WICKLIGHT - The Little Candle: Figma prototype builder.
 // Made by tools/build_figma_plugin.py. Do not edit by hand.
 const SCREENS = __DATA__;
+const LEVELS = __LEVELS__;
 const PAGE_NAME = "WICKLIGHT - The Little Candle";
 
 function imageFill(b64) {
@@ -132,6 +150,34 @@ async function build() {
   return links;
 }
 
+async function addLevel() {
+  const page = figma.root.children.find(p => p.name === PAGE_NAME) || figma.currentPage;
+  await figma.setCurrentPageAsync(page);
+  if (page.children.some(n => n.name.indexOf("Level Map") === 0)) {
+    throw new Error("The level design is already on this page.");
+  }
+  const made = [];
+  for (const l of LEVELS) {
+    const f = figma.createFrame();
+    f.name = l.name;
+    f.resize(l.w, l.h);
+    f.x = l.x;
+    f.y = l.y;
+    f.clipsContent = true;
+    f.fills = [];
+    page.appendChild(f);
+    const art = figma.createRectangle();
+    art.name = "Level art";
+    art.resize(l.w, l.h);
+    art.fills = imageFill(l.png);
+    f.appendChild(art);
+    art.locked = true;
+    made.push(f);
+  }
+  figma.viewport.scrollAndZoomIntoView(made);
+  return made.length;
+}
+
 async function deleteOld() {
   const old = figma.root.children.filter(p => p.name.indexOf("OLD VERSION") === 0);
   const keep = figma.root.children.find(p => p.name === PAGE_NAME);
@@ -143,7 +189,10 @@ async function deleteOld() {
 
 (async () => {
   try {
-    if (figma.command === "delete-old") {
+    if (figma.command === "add-level") {
+      const n = await addLevel();
+      figma.closePlugin("Done: added " + n + " level design frames below the screens.");
+    } else if (figma.command === "delete-old") {
       const n = await deleteOld();
       figma.closePlugin("Deleted " + n + " old page(s).");
     } else {
@@ -161,7 +210,7 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     data = plugin_data()
     with open(os.path.join(OUT, "code.js"), "w") as f:
-        f.write(CODE.replace("__DATA__", json.dumps(data)))
+        f.write(CODE.replace("__DATA__", json.dumps(data)).replace("__LEVELS__", json.dumps(level_data())))
     manifest = {
         "name": "WICKLIGHT Prototype Builder",
         "id": "wicklight-prototype-builder",
@@ -172,6 +221,7 @@ def main():
         "networkAccess": {"allowedDomains": ["none"]},
         "menu": [
             {"name": "Build WICKLIGHT prototype", "command": "build"},
+            {"name": "Add level design", "command": "add-level"},
             {"name": "Delete OLD VERSION pages", "command": "delete-old"},
         ],
     }

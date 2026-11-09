@@ -18,6 +18,10 @@
       "command": "build"
     },
     {
+      "name": "Add level design",
+      "command": "add-level"
+    },
+    {
       "name": "Delete OLD VERSION pages",
       "command": "delete-old"
     }

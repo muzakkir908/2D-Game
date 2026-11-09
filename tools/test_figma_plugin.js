@@ -127,6 +127,34 @@ function pngSize(buf) { return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20
   for (let i = 0; i < 50 && env3.getClosed() === null; i++) await new Promise(r => setTimeout(r, 10));
   check('Running it twice stops with a clear message', (env3.getClosed() || '').startsWith('Error: A page called'), env3.getClosed());
 
+  // "Add level design": run it in the file that already has the 4 screens
+  let closedL = null; figma.command = 'add-level'; figma.closePlugin = m => { closedL = m; };
+  vm.runInNewContext(CODE, { figma, console });
+  for (let i = 0; i < 50 && closedL === null; i++) await new Promise(r => setTimeout(r, 10));
+  check('"Add level design" finishes without an error', closedL && !closedL.startsWith('Error'), closedL);
+  const lv = page.children.filter(n => n.name.indexOf('Level Map') === 0);
+  const LV = { 'Level Map - Annotated': 'level_map_annotated_x3.png', 'Level Map': 'level_map_x3.png',
+               'Level Map - Grid': 'level_map_grid.png' };
+  check('3 level frames on the same page as the screens', lv.length === 3, lv.map(f => f.name).join(', '));
+  for (const f of lv) {
+    const file = fs.readFileSync(path.join(ROOT, '03_Level_Design', LV[f.name]));
+    const art = f.children[0];
+    const sz = pngSize(file);
+    check(`${f.name}: exact image ${LV[f.name]}, same size (${sz.w} x ${sz.h}), not stretched`,
+          images[art.fills[0].imageHash].equals(file) && f.width === sz.w && f.height === sz.h
+          && art.width === sz.w && art.height === sz.h && art.locked);
+  }
+  const overlap = (a, b) => a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
+  const all = [...frames, ...lv];
+  check('No frames overlap', all.every((a, i) => all.every((b, j) => i === j || !overlap(a, b))));
+  check('The 11 screen links are unchanged', frames.reduce((n, f) => n + f.children.filter(c => c.reactions.length).length, 0) === 11);
+  let closedL2 = null; figma.closePlugin = m => { closedL2 = m; };
+  vm.runInNewContext(CODE, { figma, console });
+  for (let i = 0; i < 50 && closedL2 === null; i++) await new Promise(r => setTimeout(r, 10));
+  check('Running "Add level design" twice stops with a clear message, no copies',
+        (closedL2 || '').startsWith('Error: The level design is already') &&
+        page.children.filter(n => n.name.indexOf('Level Map') === 0).length === 3, closedL2);
+
   for (const r of results) console.log((r.ok ? 'PASS  ' : 'FAIL  ') + r.name + (r.ok || r.info === undefined ? '' : `  (${r.info})`));
   const failed = results.filter(r => !r.ok).length;
   console.log(`\n${results.length - failed} of ${results.length} Figma plugin checks passed (logic test, not run inside Figma).`);

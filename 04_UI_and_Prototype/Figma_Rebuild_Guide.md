@@ -20,6 +20,21 @@ You need the **Figma desktop app**, because Figma only allows your own plugins i
 
 If the plugin shows an error, use the manual way below.
 
+## Add the level design to Figma (about 2 minutes)
+
+This puts the level maps into the same Figma file, below the 4 screens:
+- **Level Map - Annotated**: the route, the 8 numbered notes and the legend
+- **Level Map**: the clean tile map
+- **Level Map - Grid**: the map with tile numbers
+
+1. Use the newest project files (download the ZIP again if your copy is older than this guide).
+2. If you imported the plugin from an older copy, remove it first: **Plugins → Development → Manage plugins in development**, then remove **WICKLIGHT Prototype Builder**. Then import `figma_plugin/manifest.json` again from the new copy.
+3. Open your WICKLIGHT Figma file.
+4. Right-click the canvas → **Plugins → Development → WICKLIGHT Prototype Builder → Add level design**.
+5. The message says **"Done: added 3 level design frames below the screens."** Scroll down to see them.
+
+The level frames are only for showing the design. They are not part of the clickable prototype, so the 11 links stay the same.
+
 ---
 
 ## Manual way (about 15–20 minutes)
